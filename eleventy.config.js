@@ -5,7 +5,7 @@ export const config = {
   markdownTemplateEngine: "njk",
   dataTemplateEngine: "njk",
   htmlTemplateEngine: "njk",
-  templateFormats: ["html", "liquid", "njk", "md", "scss"],
+  templateFormats: ["html", "liquid", "njk", "md"],
   dir: {
     input: "_input",
     output: "_output",
