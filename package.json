@@ -1,0 +1,19 @@
+{
+  "name": "bookity",
+  "version": "1.0.0",
+  "description": "\"An 11ty template for self-hosting webnovels and/or fanfiction\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captainharrie/bookity.git"
+  },
+  "author": "Captain Harrie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/captainharrie/bookity/issues"
+  },
+  "homepage": "https://github.com/captainharrie/bookity#readme"
+}
