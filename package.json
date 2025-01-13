@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/captainharrie/bookity/issues"
   },
-  "homepage": "https://github.com/captainharrie/bookity#readme"
+  "homepage": "https://github.com/captainharrie/bookity#readme",
+  "type": "module",
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
 }
