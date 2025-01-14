@@ -1,1 +1,11 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+p:last-child {
+  margin-bottom:0;
+}
+
+code {
+  background-color: var(--bs-secondary-bg);
+  padding:.125rem .5rem 0;
+  border-radius: var(--bs-border-radius-sm);
+  vertical-align:baseline;
+}
