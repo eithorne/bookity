@@ -1,0 +1,19 @@
+{% set next = "" %}{% set previous = "" %}{% set collectionName = "" %}
+
+{% set paths = page.filePathStem.split("/") %}
+{% for path in paths %}
+  {% if path === "library" %}
+    {% set collectionName = paths[loop.index] %}
+  {% endif %}
+{% endfor %}
+{% set collection = collections[collectionName] %}
+
+{% for item in collection %}
+{% if item.fileSlug === page.fileSlug %}
+{% set previous = {"url": collection[loop.index0 - 1].url, "slug": collection[loop.index0 - 1].fileSlug} %}
+{% set next = {"url": collection[loop.index].url, "slug": collection[loop.index].fileSlug} %}
+{% endif %}
+{% endfor %}
+
+{% if previous.url %}<a href="{{previous.url}}">Previous</a>{% endif %}
+{% if next.url %}<a href="{{next.url}}">Next</a>{% endif %}

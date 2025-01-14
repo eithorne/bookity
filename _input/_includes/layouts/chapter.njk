@@ -1,0 +1,21 @@
+
+
+{% extends "./base.njk" %}
+
+{% block head %}
+{# Extra content to append to the <head> #}
+{% endblock %}
+
+{% block content %}
+  <main class="container mt-5 mb-4" style="min-height:calc(100vh - 11rem)">
+
+  {% include "_partials/pagination.njk" %}
+  {{ content | safe }}
+  </main>
+
+{% include "_partials/footer.njk" %}
+{% endblock %}
+
+{% block body %}
+{# Extra content append to the <body> #}
+{% endblock %}
