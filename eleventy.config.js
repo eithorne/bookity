@@ -43,7 +43,7 @@ export default async function (eleventyConfig) {
     }
   );
 
-  // Build collections from folders
+  // Build collections from folders :: borrowed from pack11ty while I try figure out how collections work, will be replacing with my own code later
   const folders = () => {
     const foldersList = [];
     if (fs.existsSync("_input/library")) {
