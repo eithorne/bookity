@@ -86,8 +86,12 @@ export default async function (eleventyConfig) {
           await eleventyConfig.addCollection(
             folder,
             async function (collectionApi) {
-              const glob = config.dir.library + "/" + folder + "/*.md";
+              const glob = config.dir.library + "/" + folder + "/*";
               const book = collectionApi.getFilteredByGlob(glob);
+              book.forEach((chapter) => {
+                chapter.settings = chapter.data;
+                chapter.fileInfo = chapter.page;
+              });
               return book;
             }
           );

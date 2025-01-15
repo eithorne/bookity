@@ -5,7 +5,14 @@
     {{book}}:
     &lt;ul&gt;
       {% for chapter in chapters %}
-        &lt;li&gt;&lt;a href=&quot;{{chapter.page.url}}&quot;&gt;{{chapter.data.title if chapter.data.title else chapter.page.fileSlug}}&lt;/a&gt;&lt;/li&gt;
+        {% set linkText = "" %}
+        {% if "title" in chapter.settings %}
+          {% set title = chapter.settings.title %}
+        {% else %}
+          {% set title = chapter.fileInfo.fileSlug %}
+        {% endif %}
+        
+        &lt;li&gt;&lt;a href=&quot;{{chapter.fileInfo.url}}&quot;&gt;{{linkText}}&lt;/a&gt;&lt;/li&gt;
       {% endfor %}
     &lt;/ul&gt;
   {% endfor %}
@@ -15,10 +22,17 @@
 
 <br>
 
-{% for book, chapters in collections.library %}
-  {{book}}:
- <ul>{% for chapter in chapters %}
-  <li><a href="{{chapter.page.url}}">{{chapter.data.title if chapter.data.title else chapter.page.fileSlug}}</a></li>
- {% endfor %}</ul>
- <br>
-{% endfor %}
+  {% for book, chapters in collections.library %}
+    {{book}}:
+    <ul>
+      {% for chapter in chapters %}
+        {% set linkText = "" %}
+        {% if "title" in chapter.settings %}
+          {% set title = chapter.settings.title %}
+        {% else %}
+          {% set title = chapter.fileInfo.fileSlug %}
+        {% endif %}
+        <li><a href="{{chapter.fileInfo.url}}">{{title}}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
