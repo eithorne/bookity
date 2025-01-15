@@ -12,6 +12,12 @@ code {
 body {
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
+  grid-template-rows: 1fr;
+  &:has(footer){
+    grid-template-rows: 1fr auto;
+  }
+  &:has(nav):has(footer) {
+  grid-template-rows: auto 1fr auto;
+}
 }
