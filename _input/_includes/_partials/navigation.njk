@@ -9,7 +9,7 @@
         {% for item in collections.navigation %}
           {% if not item.data.hide %}
           <li class="nav-item">
-            <a class="nav-link {{"active" if page.url === item.url}}" aria-current="page" href="{{item.url}}">{{item.data.title | title}}</a>
+            <a class="nav-link {{"active" if page.url === item.url}}" aria-current="page" href="{{item.url}}">{{(item.data.title if item.data.title else item.page.fileSlug) | title}}</a>
           </li>
           {% endif %}
         {% endfor %}
