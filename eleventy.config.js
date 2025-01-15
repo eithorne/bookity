@@ -1,6 +1,27 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
-
+import { basename } from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const configFile = basename(__filename);
 import fs from "node:fs";
+
+const inputFolderName = "_input";
+const outputFolderName = "_output";
+const libraryFolderPath = "/library";
+
+export const config = {
+  dir: {
+    input: inputFolderName,
+    layouts: "/_includes/layouts",
+    library: inputFolderName + libraryFolderPath,
+    output: outputFolderName,
+    config: configFile,
+  },
+  markdownTemplateEngine: "njk",
+  dataTemplateEngine: "njk",
+  htmlTemplateEngine: "njk",
+  templateFormats: ["html", "liquid", "njk", "md"],
+};
 
 export default async function (eleventyConfig) {
   // Configure Eleventy Here
@@ -43,74 +64,63 @@ export default async function (eleventyConfig) {
     }
   );
 
-  // Build collections from folders :: borrowed from pack11ty while I try figure out how collections work, will be replacing with my own code later
-  const folders = () => {
-    const foldersList = [];
-    if (fs.existsSync("_input/library")) {
-      const items = fs.readdirSync("_input/library", {
-        encoding: "utf8",
-        withFileTypes: true,
-      });
-      for (const item of items) {
-        if (item.isDirectory()) {
-          foldersList.push(item.name);
-        }
+  async function getFolders(directory) {
+    const directoryContents = await fs.promises.readdir(directory, {
+      encoding: "utf8",
+      withFileTypes: true,
+    });
+    const folders = [];
+    for (const item of directoryContents) {
+      if (item.isDirectory()) {
+        folders.push(item.name);
       }
     }
-    return foldersList;
-  };
-
-  const filteredCollectionsMemoization = {};
-
-  const getFilteredCollection = (collection, folder, limit = false) => {
-    if (folder in filteredCollectionsMemoization) {
-      // This collection already exists in memoization
-      return filteredCollectionsMemoization[folder];
+    return folders;
+  }
+  async function createLibrary() {
+    try {
+      const libraryPath = config.dir.library;
+      const books = await getFolders(libraryPath);
+      if (books.length > 0) {
+        for (const folder of books) {
+          await eleventyConfig.addCollection(
+            folder,
+            async function (collectionApi) {
+              const glob = config.dir.library + "/" + folder + "/*.md";
+              const book = collectionApi.getFilteredByGlob(glob);
+              return book;
+            }
+          );
+        }
+        await eleventyConfig.addCollection(
+          "library",
+          async function (collectionsApi) {
+            const library = {};
+            books.forEach((book) => {
+              const chapters = collectionsApi.getAll().filter((item) => {
+                const chapter =
+                  item.page.inputPath.includes(
+                    config.dir.library + "/" + book
+                  ) && item.page.fileSlug !== "library";
+                return chapter;
+              });
+              library[book] = chapters;
+            });
+            return library;
+          }
+        );
+      }
+    } catch (error) {
+      if (
+        error.message ===
+        `ENOENT: no such file or directory, scandir '${config.dir.library}'`
+      ) {
+        console.log(
+          `Library does not exist. Did you move, rename, or delete the library folder? It should be located at \x1b[1m${config.dir.library}\x1B[0m. If you want to move or rename the library folder, you will need to edit the path variables in \x1b[1m${config.dir.config}\x1B[0m`
+        );
+      }
+      console.log(error.message);
     }
-    // TODO: deal with different sorts
-    let filteredCollection = collection
-      .getFilteredByGlob(`_input/library/${folder}/*.md`)
-      .filter(
-        (item) => !item.filePathStem.match(/^\/collections\/[^\/]+\/index$/)
-      )
-      .sort((a, b) => b.date - a.date);
-
-    if (limit) {
-      // Keep only a few items per collection for performance (useful in dev mode)
-      filteredCollection = filteredCollection.slice(0, limit);
-    }
-
-    // Keep a copy of this collection in memoization for later reuse
-    filteredCollectionsMemoization[folder] = filteredCollection;
-
-    return filteredCollection;
-  };
-
-  const collections = {};
-
-  for (const folder of folders()) {
-    // Add a collection for each autocollection folder
-    collections[folder] = (collection) =>
-      getFilteredCollection(collection, folder, false);
   }
-
-  if (folders.length > 0) {
-    // Add a global collection with all autocollection folders
-    collections.contents = (collection) =>
-      getFilteredCollection(collection, `{${folders.join(",")}}`, false);
-  }
-  for (const [name, collection] of Object.entries(collections)) {
-    eleventyConfig.addCollection(name, collection);
-  }
+  createLibrary();
 }
-export const config = {
-  markdownTemplateEngine: "njk",
-  dataTemplateEngine: "njk",
-  htmlTemplateEngine: "njk",
-  templateFormats: ["html", "liquid", "njk", "md"],
-  dir: {
-    input: "_input",
-    layouts: "_includes/layouts",
-    output: "_output",
-  },
-};

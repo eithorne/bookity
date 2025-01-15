@@ -1,0 +1,24 @@
+{% card null, "bg-body-tertiary rounded-0"%}
+<pre style="white-space:pre-wrap;" >
+  {% raw %}
+  {% for book, chapters in collections.library %}
+    {{book}}:
+    &lt;ul&gt;
+      {% for chapter in chapters %}
+        &lt;li&gt;&lt;a href=&quot;{{chapter.page.url}}&quot;&gt;{{chapter.data.title if chapter.data.title else chapter.page.fileSlug}}&lt;/a&gt;&lt;/li&gt;
+      {% endfor %}
+    &lt;/ul&gt;
+  {% endfor %}
+  {% endraw %}
+</pre>
+{% endcard %}
+
+<br>
+
+{% for book, chapters in collections.library %}
+  {{book}}:
+ <ul>{% for chapter in chapters %}
+  <li><a href="{{chapter.page.url}}">{{chapter.data.title if chapter.data.title else chapter.page.fileSlug}}</a></li>
+ {% endfor %}</ul>
+ <br>
+{% endfor %}
