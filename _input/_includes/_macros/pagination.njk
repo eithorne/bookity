@@ -1,0 +1,17 @@
+{% macro pagination(collection, page) %}
+  {% set previous = {"url": collection[page.index0 - 1].url, "slug": collection[page.index0 - 1].fileSlug} %}
+  {% set next = {"url": collection[page.index].url, "slug": collection[page.index].fileSlug} %}
+  <div class="d-flex justify-content-between my-4">
+    <span style="width:10ch">
+      {% if previous.url %}
+        <a href="{{previous.url}}">{% fa "angles-left" %} Previous</a>
+      {% endif %}
+    </span>
+      <a href="/library" class="mx-auto">Return to Library</a>
+    <span style="width:10ch">
+      {% if next.url %}
+        <a href="{{next.url}}">Next {% fa "angles-right" %}</a>
+      {% endif %}
+    </span>
+  </div>
+{% endmacro %}

@@ -1,17 +1,48 @@
-
-
 {% extends "./base.njk" %}
+{% import "_macros/pagination.njk" as nav %}
+{% set book = collections[page.book] %}
 
 {% block head %}
 {# Extra content to append to the <head> #}
 {% endblock %}
 
 {% block content %}
-  <main class="container mt-5 mb-4" style="min-height:calc(100vh - 11rem)">
-
-  {% include "_partials/pagination.njk" %}
+  <header class="py-3 bg-body-tertiary">
+    <div class="d-flex container align-items-center">
+    <h1 class="fw-thin">{{page.book | title}} :: Chapter {{page.index}} </h1>
+    {% if book.length > 1 %}
+      <div class="dropdown ms-auto me-0">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Select chapter
+        </button>
+        <ul class="dropdown-menu">
+          {% for chapter in book %}
+            <li><a class="dropdown-item" href="{{chapter.page.url}}">Chapter {{loop.index}}</a></li>
+          {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    </div>
+  </header>
+  <main class="container my-4">
+    
+    {% if startNotes %}
+    {% card "Notes", "mb-3 rounded-0" %}
+    {{startNotes | renderContent("md") | safe}}
+    
+    {{"<p>See end of chapter for <a href=\"#notes\">more notes</a>.</p>" | safe if endNotes}}
+    {% endcard %}
+    {% endif %}
   {{ content | safe }}
+    {% if endNotes %}
+    <a id="notes"></a>
+    {% card "Notes", "mb-3 rounded-0" %}
+    {{endNotes}}
+    {% endcard %}
+    {% endif %}
   </main>
+  
+  <nav class="container">{{nav.pagination(book, page)}}</nav>
 
 {% include "_partials/footer.njk" %}
 {% endblock %}

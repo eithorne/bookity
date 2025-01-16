@@ -11,6 +11,8 @@ This is your homepage file, set with the default layout template of a header, a 
 
 ## Things to note:
 
+{#
+
 ##### Bootstrap 5.3 is included, with Toyhouse Compatibility!
 
 If you're familiar with the website [Toyhouse](https://toyhou.se), you might already be familiar with bootstrap. Toyhouse uses a custom version of Bootstrap 4, and its community has made a lot of free and paid layouts for character profile layouts and cast pages and whatnot using Bootstrap.
@@ -30,7 +32,7 @@ One thing to be aware of: Toyhouse has access to Font Awesome 6 Pro, but unless 
 
 But in any case, my hope is that this will make it easier for you to create your webpages if you're not very confident creating your own layouts, particularly for any character profiles you might want to include!
 
----
+---#}
 
 ##### Fontawesome 6 Free is included
 

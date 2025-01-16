@@ -4,40 +4,44 @@ tags: navigation
 ---
 
 {% card null, "bg-body-tertiary rounded-0"%}
-<pre style="white-space:pre-wrap;" >
-  {% raw %}
-  {% for book, chapters in collections.library %}
-    {{book}}:
-    &lt;ul&gt;
-      {% for chapter in chapters %}
-        {% set linkText = "" %}
-        {% if "title" in chapter.settings %}
+<pre style="white-space:pre-wrap;" class="mb-0" >
+  {% raw %}&lt;div class=&quot;row&quot;&gt;
+  {% for book in collections.library %}
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;h4&gt;{{book.name | title}}&lt;/h4&gt;
+    &lt;span class=&quot;badge bg-dark&quot;&gt;{{book.rating if book.rating else &quot;Unrated&quot;}}&lt;/span&gt; {{book.description}}
+    &lt;ul class=&quot;list-group my-3&quot;  style=&quot;max-width:500px&quot;&gt;
+      {% for chapter in book.chapters %}
+        {% set linkText = &quot;&quot; %}
+        {% if &quot;title&quot; in chapter.settings %}
           {% set title = chapter.settings.title %}
         {% else %}
-          {% set title = chapter.fileInfo.fileSlug %}
+          {% set title = &quot;Chapter &quot; + chapter.fileInfo.index %}
         {% endif %}
-        
-        &lt;li&gt;&lt;a href=&quot;{{chapter.fileInfo.url}}&quot;&gt;{{linkText}}&lt;/a&gt;&lt;/li&gt;
+        &lt;a class=&quot;list-group-item list-group-item-action&quot; href=&quot;{{chapter.fileInfo.url}}&quot;&gt;{{title | title}}&lt;/a&gt;
       {% endfor %}
     &lt;/ul&gt;
+  &lt;/div&gt;
   {% endfor %}
-  {% endraw %}
-</pre>
+&lt;/div&gt;{% endraw %}</pre>
 {% endcard %}
 
-<br>
-
-  {% for book, chapters in collections.library %}
-    {{book}}:
-    <ul>
-      {% for chapter in chapters %}
+<div class="mt-5 row">
+  {% for book in collections.library %}
+  <div class="col">
+    <h4>{{book.name | title}}</h4>
+    <span class="badge bg-dark">{{book.rating if book.rating else "Unrated"}}</span> {{book.description}}
+    <ul class="list-group my-3"  style="max-width:500px">
+      {% for chapter in book.chapters %}
         {% set linkText = "" %}
         {% if "title" in chapter.settings %}
           {% set title = chapter.settings.title %}
         {% else %}
-          {% set title = chapter.fileInfo.fileSlug %}
+          {% set title = "Chapter " + chapter.fileInfo.index %}
         {% endif %}
-        <li><a href="{{chapter.fileInfo.url}}">{{title}}</a></li>
+        <a class="list-group-item list-group-item-action" href="{{chapter.fileInfo.url}}">{{title | title}}</a>
       {% endfor %}
     </ul>
+  </div>
   {% endfor %}
+</div>

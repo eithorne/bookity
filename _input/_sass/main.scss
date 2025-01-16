@@ -14,10 +14,10 @@ body {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 1fr;
-  &:has(footer){
+  &:has(>footer){
     grid-template-rows: 1fr auto;
   }
-  &:has(nav):has(footer) {
+  &:has(>nav + main):has(>footer), &:has(>header + main):has(>footer) {
   grid-template-rows: auto 1fr auto;
 }
 }
