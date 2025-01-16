@@ -108,9 +108,17 @@ export default async function (eleventyConfig) {
             async function (collectionApi) {
               const glob = config.dir.library + "/" + folder + "/*";
               const book = collectionApi.getFilteredByGlob(glob);
-              book.forEach((chapter) => {
+              book.forEach((chapter, i) => {
                 chapter.settings = chapter.data;
                 chapter.fileInfo = chapter.page;
+                if ("tags" in chapter.settings) {
+                  chapter.settings.tags.push(folder);
+                } else {
+                  chapter.settings.tags = [folder];
+                }
+                chapter.fileInfo.book = folder;
+                chapter.fileInfo.index0 = i;
+                chapter.fileInfo.index = i + 1;
               });
               return book;
             }
@@ -119,7 +127,7 @@ export default async function (eleventyConfig) {
         await eleventyConfig.addCollection(
           "library",
           async function (collectionsApi) {
-            const library = {};
+            const library = [];
             books.forEach((book) => {
               const chapters = collectionsApi.getAll().filter((item) => {
                 const chapter =
@@ -128,7 +136,16 @@ export default async function (eleventyConfig) {
                   ) && item.page.fileSlug !== "library";
                 return chapter;
               });
-              library[book] = chapters;
+              const bookObj = {};
+              bookObj.chapters = chapters;
+              bookObj.name = book;
+              const bookKeys = Object.keys(chapters[0].data).filter((key) =>
+                key.startsWith("book.")
+              );
+              bookKeys.forEach(
+                (key) => (bookObj[key.substring(5)] = chapters[0].data[key])
+              );
+              library.push(bookObj);
             });
             return library;
           }
