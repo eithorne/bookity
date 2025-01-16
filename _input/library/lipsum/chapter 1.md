@@ -1,5 +1,5 @@
 ---
-title: "the beginning"
+title: "The Beginning"
 startNotes: |
   Praesent lectus augue, scelerisque ut sapien at, tempor lacinia purus. Sed risus mi, tempor nec varius ac, molestie id justo. Etiam ullamcorper sodales velit at placerat. Proin vel sem finibus, sagittis turpis quis, porttitor sapien. Pellentesque vulputate sit amet nibh sit amet egestas. Duis viverra magna eros, a porttitor mi ullamcorper quis. Aenean vel faucibus ipsum, id feugiat velit. Maecenas fringilla, mi eu ornare ultrices, ex tellus semper magna, a tincidunt risus nulla nec nisl. Aenean eget dapibus ante. Integer in sem ligula. Suspendisse vitae enim a nunc scelerisque ullamcorper. Etiam suscipit ligula vitae lorem auctor aliquam. Sed sagittis velit ac tortor auctor gravida. Nullam vitae orci quis mi tincidunt pharetra. Sed vel turpis a dolor semper pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
 
@@ -8,7 +8,7 @@ endNotes: |
   Suspendisse potenti. Etiam sit amet hendrerit dolor. Nam elementum dolor lectus, vitae efficitur mi sagittis at. Duis hendrerit velit sed ante lacinia maximus. Cras eget fringilla dui. Vestibulum tincidunt arcu ac enim venenatis, eget rutrum urna ultricies. Nullam cursus maximus varius. Fusce molestie in leo et ultricies. Sed sem metus, vestibulum quis est quis, volutpat bibendum diam.
 ---
 
-## The Beginning
+## {{title}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt pellentesque tortor, eget scelerisque mi vehicula vitae. Duis sed nisl egestas, tempus nunc ut, volutpat metus. Morbi vitae rhoncus ante. Quisque auctor enim dolor, at egestas lectus auctor et. Praesent condimentum massa et ultricies volutpat. Donec imperdiet tortor augue, a varius neque hendrerit vitae. In quis fringilla risus. Ut vitae luctus dolor. Curabitur fringilla eros ut lorem varius egestas. Sed viverra convallis posuere. Fusce sed condimentum ipsum, et pharetra sapien. Proin sit amet maximus lorem. Integer placerat magna tellus, ac suscipit ex pretium a. Sed in malesuada nulla.
 
