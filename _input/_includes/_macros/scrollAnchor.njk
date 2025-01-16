@@ -1,0 +1,7 @@
+{% macro createAnchor(scrollAnchorID, offset = 0, styling = "") %}
+<div data-bkty-scroll-anchor="{{scrollAnchorID}}" style="width: 1px;height: 1px;transform:translatey({{offset}});{{styling}}"></div>
+{% endmacro %}
+
+{% macro createObserver(scrollAnchorID, targetElement, classToAdd) %}
+<script>createScrollObserver("{{scrollAnchorID}}", "{{targetElement}}", "{{classToAdd}}")</script>
+{% endmacro %}
