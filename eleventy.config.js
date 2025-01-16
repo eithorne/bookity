@@ -3,7 +3,7 @@ import { basename } from "node:path";
 import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const configFile = basename(__filename);
-import fs from "node:fs";
+import { createLibrary } from "./_input/_11ty/collections/createLibrary";
 
 const inputFolderName = "_input";
 const outputFolderName = "_output";
@@ -84,84 +84,5 @@ export default async function (eleventyConfig) {
   eleventyConfig.addFilter("sortByOrder", sortByOrder);
 
   // Create Library
-  async function getFolders(directory) {
-    const directoryContents = await fs.promises.readdir(directory, {
-      encoding: "utf8",
-      withFileTypes: true,
-    });
-    const folders = [];
-    for (const item of directoryContents) {
-      if (item.isDirectory()) {
-        folders.push(item.name);
-      }
-    }
-    return folders;
-  }
-  async function createLibrary() {
-    try {
-      const libraryPath = config.dir.library;
-      const books = await getFolders(libraryPath);
-      if (books.length > 0) {
-        for (const folder of books) {
-          await eleventyConfig.addCollection(
-            folder,
-            async function (collectionApi) {
-              const glob = config.dir.library + "/" + folder + "/*";
-              const book = collectionApi.getFilteredByGlob(glob);
-              book.forEach((chapter, i) => {
-                chapter.settings = chapter.data;
-                chapter.fileInfo = chapter.page;
-                if ("tags" in chapter.settings) {
-                  chapter.settings.tags.push(folder);
-                } else {
-                  chapter.settings.tags = [folder];
-                }
-                chapter.fileInfo.book = folder;
-                chapter.fileInfo.index0 = i;
-                chapter.fileInfo.index = i + 1;
-              });
-              return book;
-            }
-          );
-        }
-        await eleventyConfig.addCollection(
-          "library",
-          async function (collectionsApi) {
-            const library = [];
-            books.forEach((book) => {
-              const chapters = collectionsApi.getAll().filter((item) => {
-                const chapter =
-                  item.page.inputPath.includes(
-                    config.dir.library + "/" + book
-                  ) && item.page.fileSlug !== "library";
-                return chapter;
-              });
-              const bookObj = {};
-              bookObj.chapters = chapters;
-              bookObj.name = book;
-              const bookKeys = Object.keys(chapters[0].data).filter((key) =>
-                key.startsWith("book.")
-              );
-              bookKeys.forEach(
-                (key) => (bookObj[key.substring(5)] = chapters[0].data[key])
-              );
-              library.push(bookObj);
-            });
-            return library;
-          }
-        );
-      }
-    } catch (error) {
-      if (
-        error.message ===
-        `ENOENT: no such file or directory, scandir '${config.dir.library}'`
-      ) {
-        console.log(
-          `Library does not exist. Did you move, rename, or delete the library folder? It should be located at \x1b[1m${config.dir.library}\x1B[0m. If you want to move or rename the library folder, you will need to edit the path variables in \x1b[1m${config.dir.config}\x1B[0m`
-        );
-      }
-      console.log(error.message);
-    }
-  }
-  createLibrary();
+  createLibrary(eleventyConfig, config.dir.library);
 }
