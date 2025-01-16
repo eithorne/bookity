@@ -23,6 +23,14 @@ body {
   }
 }
 
+[data-bkt-text] {
+  opacity: 1;
+  transition: all 0.2s !important;
+}
+.adjustableTextSize {
+  font-size: unquote("calc(1em + var(--text-size-modifier, 0))");
+}
+
 .stacked-grid {
   display: grid;
   & > * {
