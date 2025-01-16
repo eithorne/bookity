@@ -1,6 +1,6 @@
 ---
 title: home
-hide: false
+order: 1
 ---
 
 # Hello world!

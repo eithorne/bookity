@@ -64,6 +64,26 @@ export default async function (eleventyConfig) {
     }
   );
 
+  // Custom Filters
+
+  function sortByOrder(collections) {
+    let collectionsClone = [...collections];
+    return collectionsClone.sort((a, b) => {
+      // if order is not set, we'll send it to the end, maintaining the default order
+      const maxValue = collections.length * 2;
+      const orderA = a.data.order
+        ? a.data.order
+        : maxValue - collectionsClone.indexOf(a);
+      const orderB = b.data.order
+        ? b.data.order
+        : maxValue - collectionsClone.indexOf(b);
+      return Math.sign(orderA - orderB);
+    });
+  }
+
+  eleventyConfig.addFilter("sortByOrder", sortByOrder);
+
+  // Create Library
   async function getFolders(directory) {
     const directoryContents = await fs.promises.readdir(directory, {
       encoding: "utf8",
