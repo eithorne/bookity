@@ -1,0 +1,16 @@
+{% macro chooseFont(options) %}
+{% set dropdownLinks = [
+  {label: "Default"},
+  {label: "Serif", data: 'data-bkt-font-family="serif" data-bkt-font-style="serif"'},
+  {label: "Sans-serif", data: 'data-bkt-font-family="sans-serif" data-bkt-font-style="sans-serif"'}
+] %}
+{% for font in options.extraFonts %}
+  {% set pushingFonts %}
+  {{dropdownLinks.push({label: font.name, data: 'data-bkt-font-family="' + font.name + '" data-bkt-font-style="' + font.style + '"'})}}
+  {% endset %}
+{% endfor %}
+ {% set pushingFonts %}
+  {{dropdownLinks.push({label:"A font from your computer", data: 'data-bkt-font-family="user-choice"'})}}
+ {% endset %}
+{% dropdown {label: "Change font", color: options.buttonColor if options.buttonColor else "primary"}, dropdownLinks, options.buttonClasses + " fontSwitcher" %}
+{% endmacro %}

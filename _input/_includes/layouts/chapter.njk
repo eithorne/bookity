@@ -1,6 +1,7 @@
 {% extends "./base.njk" %}
 {% import "_macros/pagination.njk" as nav %}
 {% import "_macros/scrollAnchor.njk" as scroll %}
+{% import "_macros/chooseFont.njk" as fonts %}
 {% set book = collections[page.folder] %}
 
 {% block head %}
@@ -11,25 +12,30 @@
   <header class="bg-body-tertiary py-3 sticky-top d-flex" id="header">
     <div class="flex-grow-1"></div>
     <div class="d-flex container align-items-center justify-content-around hideableContent collapsed fade">
-      <h1 class="fw-thin">{{page.folder | title}} :: Chapter {{page.index}} </h1>
+      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}} :: Chapter {{page.index}} </h1>
       {% if book.length > 1 %}
-        <div class="dropdown ms-auto me-0">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Select chapter
-          </button>
-          <ul class="dropdown-menu">
-            {% for chapter in book %}
-              <li><a class="dropdown-item" href="{{chapter.page.url}}">Chapter {{loop.index}}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
+        {% set dropdownLinks = [] %}
+        {% for chapter in book %}
+        {% set addToArray %}
+          {{dropdownLinks.push({url: chapter.page.url, label: "Chapter" + loop.index})}}
+        {% endset %}
+        {% endfor %}
+        
+        {% dropdown {label: "Select chapter", color: "primary"}, dropdownLinks %}
+        
       {% endif %}
+      
+      {{fonts.chooseFont({
+        buttonColor: "secondary",
+        buttonClasses: "ms-3",
+        extraFonts: [{name:"Merriweather", style: "serif"},{name: "Smooch Sans", style: "sans-serif"}]}
+      )}}
       {% include "_partials/textSize.njk" %}
     </div>
     <div class="flex-grow-1"></div>
-    <a id="header-collapse" data-bs-toggle="collapse" data-bs-target="header .hideableContent" class="link-secondary opacity-50 fs-4 me-3 my-auto justify-self-end stacked-grid text-decoration-none">{% fa "solid angle-up hideableContent collapsed fade" %}{% fa "solid angle-down hideableContent collapse show fade" %}</a>
+    <a id="header-collapse" data-bs-toggle="collapse" data-bs-target="header .hideableContent" class="opacity-50 fs-4 me-3 my-auto justify-self-end stacked-grid text-decoration-none">{% fa {icon: "angle-up"}, "hideableContent collapsed fade" %}{% fa {icon: "angle-down"}, "hideableContent collapse show fade" %}</a>
   </header>
-  <main class="container my-4 adjustableTextSize">
+  <main class="container my-4 adjustableTextSize adjustableFont">
     {{scroll.createAnchor("hideSticky", "50px")}}
     {% if startNotes %}
     {% card "Notes", "mb-3 rounded-0" %}
@@ -54,7 +60,9 @@
 
 {% block body %}
 {# Extra content append to the <body> #}
+<script src="/assets/js/js.cookie.js"></script>
 <script src="/assets/js/textSize.js"></script>
+<script src="/assets/js/chooseFont.js"></script>
 <script src="/assets/js/pageScrolled.js"></script>
 {{scroll.createObserver("hideSticky", "#header", "isSticky")}}
 {% endblock %}

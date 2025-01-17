@@ -3,9 +3,12 @@ const decrease = document.querySelector("[data-bkt-text='decreaseSize']");
 const reset = document.querySelector("[data-bkt-text='reset']");
 
 const resizeable = document.querySelector(".adjustableTextSize");
-let currentModifier = 0;
+let currentModifier = Cookies.get("fontSize") ?? 0;
+const min = 14;
+const max = 20;
 
-document.body.style.setProperty("--text-size-modifier", currentModifier);
+document.body.style.setProperty("--text-size-modifier", currentModifier + "px");
+if (currentModifier !== 0) reset.classList.remove("disabled");
 
 decrease.addEventListener("click", () => {
   const size = parseInt(
@@ -13,16 +16,21 @@ decrease.addEventListener("click", () => {
     10
   );
   reset.classList.remove("disabled");
-  if (size === 14) {
-    decrease.classList.add("disabled");
-  }
   document.body.style.setProperty(
     "--text-size-modifier",
     --currentModifier + "px"
   );
-  if (size === 20) {
+  if (size === min) {
+    decrease.classList.add("disabled");
+  }
+  if (size === max) {
     increase.classList.remove("disabled");
   }
+
+  if (currentModifier === 0) {
+    reset.classList.add("disabled");
+  }
+  Cookies.set("fontSize", currentModifier);
 });
 
 increase.addEventListener("click", () => {
@@ -32,16 +40,20 @@ increase.addEventListener("click", () => {
   );
 
   reset.classList.remove("disabled");
-  if (size === 19) {
-    increase.classList.add("disabled");
-  }
   document.body.style.setProperty(
     "--text-size-modifier",
     ++currentModifier + "px"
   );
-  if (size === 14) {
+  if (size === max) {
+    increase.classList.add("disabled");
+  }
+  if (size === min) {
     decrease.classList.remove("disabled");
   }
+  if (currentModifier === 0) {
+    reset.classList.add("disabled");
+  }
+  Cookies.set("fontSize", currentModifier);
 });
 
 reset.addEventListener("click", () => {
@@ -50,4 +62,5 @@ reset.addEventListener("click", () => {
   reset.classList.add("disabled");
   increase.classList.remove("disabled");
   decrease.classList.remove("disabled");
+  Cookies.set("fontSize", currentModifier);
 });
