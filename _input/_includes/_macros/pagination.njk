@@ -4,13 +4,13 @@
   <div class="d-flex justify-content-between my-4">
     <span style="width:10ch">
       {% if previous.url %}
-        <a href="{{previous.url}}">{% fa "angles-left" %} Previous</a>
+        <a href="{{previous.url}}">{% fa {icon: "angles-left", size: "sm"} %} Previous</a>
       {% endif %}
     </span>
       <a href="/library" class="mx-auto">Return to Library</a>
     <span style="width:10ch">
       {% if next.url %}
-        <a href="{{next.url}}">Next {% fa "angles-right" %}</a>
+        <a href="{{next.url}}">Next {% fa {icon: "angles-right", size: "sm"} %}</a>
       {% endif %}
     </span>
   </div>

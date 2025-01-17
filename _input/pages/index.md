@@ -41,17 +41,16 @@ You can use these icons like usual with `<i class="fa-solid fa-heart">`, or you 
 For the shortcode, if you provide just the icon name it'll assume you want that icon in the solid style:  
 {% raw %}`{% fa "heart" %}`{% endraw %} => {% fa "heart" %}
 
-But you can also pass a style and an icon:  
-{% raw %}`{% fa "regular heart" %}`{% endraw %} => {% fa "regular heart" %}  
-{% raw %}`{% fa "heart regular" %}`{% endraw %} => {% fa "heart regular" %} <span class="text-secondary ms-3">// order doesn't matter for the first two classes</span>  
-{% raw %}`{% fa "brands bluesky" %}`{% endraw %} => {% fa "brands bluesky" %}
+But you can also pass a style and an icon like so:  
+{% raw %}`{% fa {icon: "heart", style: "regular"} %}`{% endraw %} => {% fa {icon: "heart", style: "regular"} %}
+{% raw %}`{% fa {icon: "bluesky", style: "brands"} %}`{% endraw %} => {% fa {icon: "bluesky", style: "brands"} %}
 
-And you can also give it more classes after the first two! Just make sure to include both the style and icon classes if you want to add additional classes.  
-{% raw %}`{% fa "solid heart text-danger" %}`{% endraw %} => {% fa "solid heart text-danger" %}  
-{% raw %}`{% fa "brands bluesky text-primary" %}`{% endraw %} => {% fa "brands bluesky text-primary" %}
+If you want to give it non-fontawesome classes, you can give it a second string
+{% raw %}`{% fa "heart", "text-danger" %}`{% endraw %} => {% fa "heart", "text-danger" %}  
+{% raw %}`{% fa {icon: "bluesky", style: "brands"}, "text-primary" %}`{% endraw %} => {% fa {icon: "bluesky", style: "brands"}, "text-primary" %}
 
-Lastly, if you give it a second string that will be used for the inline styling.  
-{% raw %}`{% fa "solid triangle-exclamation fa-beat-fade", "--fa-animation-duration: 2s;font-size:1.5em" %}`{% endraw %} => {% fa "solid triangle-exclamation fa-beat-fade", "--fa-animation-duration: 2s;font-size:1.5em" %}
+Lastly, if you give it a third string that will be used for the inline styling.  
+{% raw %}`{% fa {icon: "triangle-exclamation", animation: "fa-beat-fade"}, null, "--fa-animation-duration: 2s;font-size:1.5em" %}`{% endraw %} => {% fa {icon: "triangle-exclamation", animation: "fa-beat-fade"}, null, "--fa-animation-duration: 2s;font-size:1.5em" %}
 
 ---
 
