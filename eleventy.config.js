@@ -1,10 +1,12 @@
 import { EleventyRenderPlugin } from "@11ty/eleventy";
-import { basename } from "node:path";
+import path from "node:path";
+import glob from "fast-glob";
 import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
-const configFile = basename(__filename);
+const configFile = path.basename(__filename);
 import { createLibrary } from "./_input/_11ty/collections/createLibrary";
 
+const rootPath = import.meta.dirname;
 const inputFolderName = "_input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
@@ -28,41 +30,57 @@ export default async function (eleventyConfig) {
 
   // Copy these folders and their contents to the corresponding directory in _output
   eleventyConfig.addPassthroughCopy("_input/assets");
-  eleventyConfig.addPassthroughCopy({
-    "node_modules/@fortawesome/fontawesome-free/webfonts": "/assets/fonts",
-  });
 
   // Copy files with these extensions from _input to the corresponding directory in _output
   eleventyConfig.addPassthroughCopy("**/*.jpg");
   eleventyConfig.addPassthroughCopy("**/*.jpg");
 
+  // Node modules
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/@fortawesome/fontawesome-free/webfonts": "/assets/fonts",
+  });
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/js-cookie/src/js.cookie.js": "assets/js/",
+  });
+
   // Plugins
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // Custom Shortcodes
-  eleventyConfig.addShortcode("fa", function (classString, stylingString = "") {
-    const classes = classString.split(" ");
-    const styling = `style="${stylingString}"`;
-
-    if (classes.length === 1) {
-      classes[0] = "fa-solid fa-" + classes[0];
-    } else {
-      classes[0] = "fa-" + classes[0];
-      classes[1] = "fa-" + classes[1];
-    }
-
-    return `<i class="${classes.join(" ")}" ${styling}></i>`;
-  });
-
-  eleventyConfig.addPairedShortcode(
-    "card",
-    function (content, title, classString = "", styling = "") {
-      const header = title ? `<div class="card-header">${title}</div>` : "";
-      const body = `<div class="card-body">${content}</div>`;
-
-      return `<div class="card ${classString}" style="${styling}">${header}${body}</div>`;
-    }
+  const shortcodes = [];
+  const shortcodesDirectory = path.join(
+    `${rootPath}/${inputFolderName}/_11ty/shortcodes/*.js`
   );
+  const shortcodeFiles = await glob(shortcodesDirectory);
+  const importedShortcodeFiles = await Promise.all(
+    shortcodeFiles.map((file) => import(file))
+  );
+  // console.log("Imported shortcode files: ", importedShortcodeFiles);
+  importedShortcodeFiles.forEach((file) => {
+    for (const [name, shortcode] of Object.entries(file)) {
+      eleventyConfig.addShortcode(name, shortcode);
+      shortcodes.push(name);
+    }
+  });
+  // console.log("shortcodes: ", shortcodes);
+
+  const blockcodes = [];
+  const blockcodesDirectory = path.join(
+    `${rootPath}/${inputFolderName}/_11ty/blockcodes/*.js`
+  );
+  const blockcodeFiles = await glob(blockcodesDirectory);
+  const importedBlockcodeFiles = await Promise.all(
+    blockcodeFiles.map((file) => import(file))
+  );
+  // console.log("imported blockcode files: ", importedBlockcodeFiles);
+  importedBlockcodeFiles.forEach((file) => {
+    for (const [name, blockcode] of Object.entries(file)) {
+      eleventyConfig.addPairedShortcode(name, blockcode);
+      blockcodes.push(name);
+    }
+  });
+  // console.log("blockcodes: ", blockcodes);
+  //eleventyConfig.addPairedShortcode("card");
 
   // Custom Filters
 
