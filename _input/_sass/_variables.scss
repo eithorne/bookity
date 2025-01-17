@@ -1,0 +1,47 @@
+$primary: mix($purple, $pink, 40);
+$secondary: mix($cyan-300, $teal-300);
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+);
+
+$body-color: mix($gray-600, $purple-700, 60);
+$body-bg: mix($purple-100, $gray-100, 10);
+
+$body-secondary-color: rgba($body-color, 0.75);
+$body-secondary-bg: darken($body-bg, 2);
+
+$body-tertiary-color: rgba($body-color, 0.5);
+$body-tertiary-bg: darken($body-bg, 3);
+
+$body-emphasis-color: $black;
+
+$link-color: $primary;
+$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-decoration: none;
+
+$border-color: rgba(mix($primary, $body-color, 50), 0.175);
+$border-color-translucent: rgba($body-color, 0.175);
