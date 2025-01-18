@@ -55,3 +55,7 @@
 // scss-docs-end import-stack
 
 @import "./TH-compat/missing-classes";
+
+.card {
+  color: inherit;
+}
