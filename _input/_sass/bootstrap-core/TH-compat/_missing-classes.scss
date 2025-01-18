@@ -166,10 +166,12 @@
   padding-left: calc(var(--bs-gutter-x) * 0.666666667);
 }
 
-.pull-left {
+.pull-left,
+.float-left {
   float: left;
 }
-.pull-right {
+.pull-right,
+.float-right {
   float: right;
 }
 img {
