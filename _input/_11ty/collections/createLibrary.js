@@ -40,7 +40,6 @@ export async function createLibrary(eleventyConfig, path) {
           }
         );
       }
-
       await eleventyConfig.addCollection(
         parentName,
         async function (collectionsApi) {
@@ -68,6 +67,7 @@ export async function createLibrary(eleventyConfig, path) {
             });
             library.push(folderObj);
           });
+          eleventyConfig[parentName] = library;
           return library;
         }
       );

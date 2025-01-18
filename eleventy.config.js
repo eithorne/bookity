@@ -4,7 +4,7 @@ import glob from "fast-glob";
 import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const configFile = path.basename(__filename);
-import { createLibrary } from "./_input/_11ty/collections/createLibrary";
+import { createLibrary } from "./_input/_11ty/collections/createLibrary.js";
 
 const rootPath = import.meta.dirname;
 const inputFolderName = "_input";
