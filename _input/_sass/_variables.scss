@@ -1,3 +1,5 @@
+@import "./bootstrap-core/color-system";
+
 $primary: mix($purple, $pink, 40);
 $secondary: mix($cyan-300, $teal-300);
 $success: $green;
@@ -27,6 +29,11 @@ $theme-colors: (
   "teal": $teal,
   "cyan": $cyan,
 );
+
+@import "../../node_modules/bootstrap/scss/variables";
+
+$font-family-base: "Lexend";
+$font-family-code: "Anonymous Pro";
 
 $body-color: mix($gray-600, $purple-700, 60);
 $body-bg: mix($purple-100, $gray-100, 10);

@@ -1,0 +1,190 @@
+.no-gutters {
+  margin-left: 0;
+  margin-right: 0;
+  & > .col,
+  & > [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.align-content-around,
+.align-content-center,
+.align-content-end,
+.align-content-start,
+.align-content-stretch,
+.align-items-baseline,
+.align-items-center,
+.align-items-end,
+.align-items-start,
+.align-items-stretch,
+.flex-column,
+.flex-column-reverse,
+.flex-nowrap,
+.flex-row,
+.flex-row-reverse,
+.flex-wrap,
+.flex-wrap-reverse,
+.justify-content-around,
+.justify-content-between,
+.justify-content-center,
+.justify-content-end,
+.justify-content-start {
+  display: flex;
+}
+
+.invisible {
+  visibility: hidden !important;
+}
+.hidden-xs-up {
+  display: none !important;
+}
+@media (max-width: 575.98px) {
+  .hidden-xs-down {
+    display: none !important;
+  }
+}
+@media (min-width: 576px) {
+  .hidden-sm-up {
+    display: none !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .hidden-sm-down {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .hidden-md-up {
+    display: none !important;
+  }
+}
+@media (max-width: 991.98px) {
+  .hidden-md-down {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .hidden-lg-up {
+    display: none !important;
+  }
+}
+@media (max-width: 1199.98px) {
+  .hidden-lg-down {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .hidden-xl-up {
+    display: none !important;
+  }
+}
+.hidden-xl-down,
+.visible-print-block {
+  display: none !important;
+}
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto,
+.container {
+  position: relative;
+}
+.btn {
+  white-space: nowrap;
+}
+
+.row > * {
+  padding-right: calc(var(--bs-gutter-x) * 0.666666667);
+  padding-left: calc(var(--bs-gutter-x) * 0.666666667);
+}
+
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+:root {
+  --input-border-color: var(--bs-border-color);
+  --color-background: var(--bs-body-bg);
+}
+
+.bg-faded {
+  background-color: var(--bs-tertiary-bg);
+}
+.card-block {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}

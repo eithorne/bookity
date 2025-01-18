@@ -1,0 +1,160 @@
+$utilities: map-merge(
+  (
+    // scss-docs-start utils-borders
+    "border-right":
+      (
+        property: border-right,
+        class: border-right,
+        values: (
+          null: var(--#{$prefix}border-width) var(--#{$prefix}border-style)
+            var(--#{$prefix}border-color),
+          0: 0,
+        ),
+      ),
+    "border-left": (
+      property: border-left,
+      class: border-left,
+      values: (
+        null: var(--#{$prefix}border-width) var(--#{$prefix}border-style)
+          var(--#{$prefix}border-color),
+        0: 0,
+      ),
+    ),
+    // scss-docs-start utils-position
+    "left":
+      (
+        property: left,
+        class: left,
+        values: $position-values,
+      ),
+    "right": (
+      property: right,
+      class: right,
+      values: $position-values,
+    ),
+    // scss-docs-start utils-border-radius
+    "rounded-left":
+      (
+        property: border-top-right-radius border-bottom-right-radius,
+        class: rounded-left,
+        values: (
+          null: var(--#{$prefix}border-radius),
+          0: 0,
+          1: var(--#{$prefix}border-radius-sm),
+          2: var(--#{$prefix}border-radius),
+          3: var(--#{$prefix}border-radius-lg),
+          4: var(--#{$prefix}border-radius-xl),
+          5: var(--#{$prefix}border-radius-xxl),
+          circle: 50%,
+          pill: var(--#{$prefix}border-radius-pill),
+        ),
+      ),
+    "rounded-right": (
+      property: border-bottom-left-radius border-top-left-radius,
+      class: rounded-right,
+      values: (
+        null: var(--#{$prefix}border-radius),
+        0: 0,
+        1: var(--#{$prefix}border-radius-sm),
+        2: var(--#{$prefix}border-radius),
+        3: var(--#{$prefix}border-radius-lg),
+        4: var(--#{$prefix}border-radius-xl),
+        5: var(--#{$prefix}border-radius-xxl),
+        circle: 50%,
+        pill: var(--#{$prefix}border-radius-pill),
+      ),
+    ),
+    // Text
+    // scss-docs-start utils-text
+    "text-align-th":
+      (
+        responsive: true,
+        property: text-align,
+        class: text,
+        values: (
+          left: left,
+          right: right,
+        ),
+      ),
+    "font-size-th": (
+      rfs: true,
+      property: font-size,
+      class: fs,
+      values: $font-sizes,
+    ),
+    "font-style-th": (
+      property: font-style,
+      class: font,
+      values: italic normal,
+    ),
+    "font-weight-th": (
+      property: font-weight,
+      class: font-weight,
+      values: (
+        lighter: $font-weight-lighter,
+        light: $font-weight-light,
+        normal: $font-weight-normal,
+        medium: $font-weight-medium,
+        semibold: $font-weight-semibold,
+        bold: $font-weight-bold,
+        bolder: $font-weight-bolder,
+      ),
+    ),
+    // Margin utilities
+    // scss-docs-start utils-spacing
+    "margin-right":
+      (
+        responsive: true,
+        property: margin-right,
+        class: mr,
+        values:
+          map-merge(
+            $spacers,
+            (
+              auto: auto,
+            )
+          ),
+      ),
+    "margin-left": (
+      responsive: true,
+      property: margin-left,
+      class: ml,
+      values:
+        map-merge(
+          $spacers,
+          (
+            auto: auto,
+          )
+        ),
+    ),
+    // Negative margin utilities
+    "negative-margin-right":
+      (
+        responsive: true,
+        property: margin-right,
+        class: mr,
+        values: $negative-spacers,
+      ),
+    "negative-margin-left": (
+      responsive: true,
+      property: margin-left,
+      class: ml,
+      values: $negative-spacers,
+    ),
+    // Padding utilities
+    "padding-right":
+      (
+        responsive: true,
+        property: padding-right,
+        class: pr,
+        values: $spacers,
+      ),
+    "padding-left": (
+      responsive: true,
+      property: padding-left,
+      class: pl,
+      values: $spacers,
+    )
+  ),
+  $utilities
+);
