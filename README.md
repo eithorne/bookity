@@ -17,4 +17,6 @@ This is not super high priority, but people might wish to include a PDF download
 
 # LICENSE
 
-The Bookity template itself is licensed under the MIT license, meaning you are free to use modify and build upon the project as you wish. Any files located inside the `/_input/pages/tests` folder are NOT part of the project and do not have the same license, they are being kindly provided for testing purposes during development for the TH compatibility, and have their own terms and conditions that can be found by visiting the corresponding code's Toyhouse page.
+The Bookity template itself is licensed under the MIT license, meaning you are free to use modify and build upon the project as you wish.  
+
+Any files located inside the `/_input/pages/tests` folder are NOT part of the project and do not have the same license, they are being kindly provided for testing purposes during development for the TH compatibility, and have their own terms and conditions that can be found by visiting the corresponding code's Toyhouse page.
