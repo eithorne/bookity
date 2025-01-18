@@ -1,5 +1,5 @@
 {% if startNotes or endNotes %}
-{% card "Notes", "mb-3 rounded-0" %}
+{% card {title: "Notes", classes:"mb-3 rounded-0"} %}
 
 {% if startNotes %}
 {{startNotes | renderContent("md") | safe}}
@@ -13,7 +13,7 @@
 
 {% if endNotes %}
 <a id="notes-{{page.index}}"></a>
-{% card "Notes", "mb-3 rounded-0" %}
+{% card {title: "Notes", classes:"mb-3 rounded-0"} %}
 {{endNotes}}
 {% endcard %}
 {% endif %}
