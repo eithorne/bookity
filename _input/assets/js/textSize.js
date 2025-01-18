@@ -5,7 +5,7 @@ const reset = document.querySelector("[data-bkt-text='reset']");
 const resizeable = document.querySelector(".adjustableTextSize");
 let currentModifier = Cookies.get("fontSize") ?? 0;
 const min = 14;
-const max = 20;
+const max = 28;
 
 document.body.style.setProperty("--text-size-modifier", currentModifier + "px");
 if (currentModifier !== 0) reset.classList.remove("disabled");

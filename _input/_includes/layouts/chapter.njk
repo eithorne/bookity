@@ -3,16 +3,14 @@
 {% import "_macros/scrollAnchor.njk" as scroll %}
 {% import "_macros/chooseFont.njk" as fonts %}
 {% set book = collections[page.folder] %}
-
 {% block head %}
 {# Extra content to append to the <head> #}
 {% endblock %}
-
 {% block content %}
   <header class="bg-body-tertiary py-3 sticky-top d-flex" id="header">
     <div class="flex-grow-1"></div>
     <div class="d-flex container align-items-center justify-content-around hideableContent collapsed fade">
-      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}} :: Chapter {{page.index}} </h1>
+      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}} {{":: Chapter " + page.index}} </h1>
       {% if book.length > 1 %}
         {% set dropdownLinks = [] %}
         {% for chapter in book %}
@@ -28,7 +26,7 @@
       {{fonts.chooseFont({
         buttonColor: "secondary",
         buttonClasses: "ms-3",
-        extraFonts: [{name:"Merriweather", style: "serif"},{name: "Smooch Sans", style: "sans-serif"}]}
+        extraFonts: [{name:"Merriweather", style: "serif"},{name: "Gentium Book Plus", style: "serif"},{name: "Share Tech Mono", style: "serif"}]}
       )}}
       {% include "_partials/textSize.njk" %}
     </div>
@@ -37,22 +35,9 @@
   </header>
   <main class="container my-4 adjustableTextSize adjustableFont">
     {{scroll.createAnchor("hideSticky", "50px")}}
-    {% if startNotes %}
-    {% card "Notes", "mb-3 rounded-0" %}
-    {{startNotes | renderContent("md") | safe}}
-    
-    {{"<p>See end of chapter for <a href=\"#notes\">more notes</a>.</p>" | safe if endNotes}}
-    {% endcard %}
-    {% endif %}
-  {{ content | safe }}
-    {% if endNotes %}
-    <a id="notes"></a>
-    {% card "Notes", "mb-3 rounded-0" %}
-    {{endNotes}}
-    {% endcard %}
-    {% endif %}
+    {% include "_partials/chapter.njk" %}
   </main>
-  
+   
   <nav class="container">{{nav.pagination(book, page)}}</nav>
 
 {% include "_partials/footer.njk" %}
@@ -60,9 +45,8 @@
 
 {% block body %}
 {# Extra content append to the <body> #}
-<script src="/assets/js/js.cookie.js"></script>
-<script src="/assets/js/textSize.js"></script>
-<script src="/assets/js/chooseFont.js"></script>
-<script src="/assets/js/pageScrolled.js"></script>
 {{scroll.createObserver("hideSticky", "#header", "isSticky")}}
+    <script src="/assets/js/js.cookie.js"></script>
+    <script src="/assets/js/textSize.js"></script>
+    <script src="/assets/js/chooseFont.js"></script>
 {% endblock %}

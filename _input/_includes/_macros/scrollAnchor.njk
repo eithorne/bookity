@@ -3,5 +3,6 @@
 {% endmacro %}
 
 {% macro createObserver(scrollAnchorID, targetElement, classToAdd) %}
+<script src="/assets/js/pageScrolled.js"></script>
 <script>createScrollObserver("{{scrollAnchorID}}", "{{targetElement}}", "{{classToAdd}}")</script>
 {% endmacro %}
