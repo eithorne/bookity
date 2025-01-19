@@ -161,11 +161,6 @@
   white-space: nowrap;
 }
 
-.row > * {
-  padding-right: calc(var(--bs-gutter-x) * 0.666666667);
-  padding-left: calc(var(--bs-gutter-x) * 0.666666667);
-}
-
 .pull-left,
 .float-left {
   float: left;
