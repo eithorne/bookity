@@ -7,7 +7,7 @@ const configFile = path.basename(__filename);
 import { createLibrary } from "./_11ty/collections/createLibrary.js";
 
 const rootPath =  process.cwd();
-const inputFolderName = "_input";
+const inputFolderName = "input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
 
@@ -15,7 +15,8 @@ export const config = {
   dir: {
     input: inputFolderName,
     data: "../_data",
-    layouts: "/_includes/layouts",
+    includes: "../_includes",
+    layouts: "../_includes/layouts",
     library: inputFolderName + libraryFolderPath,
     output: outputFolderName,
     config: configFile,

@@ -1,5 +1,7 @@
 ---
 title: home
+tags:
+  - navigation
 order: 1
 ---
 

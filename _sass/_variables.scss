@@ -30,7 +30,7 @@ $theme-colors: (
   "cyan": $cyan,
 );
 
-@import "../../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/variables";
 
 $font-family-base: "Lexend";
 $font-family-code: "Anonymous Pro";
