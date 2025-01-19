@@ -6,10 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const configFile = path.basename(__filename);
 import { createLibrary } from "./_input/_11ty/collections/createLibrary.js";
 
-const rootPath = import.meta.dirname;
+const rootPath = import.meta.dirname + "/";
 const inputFolderName = "_input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
+
+const inputFolderPath = rootPath + "/" + inputFolderName.replace("//", "/");
 
 export const config = {
   dir: {
@@ -49,7 +51,7 @@ export default async function (eleventyConfig) {
   // Custom Shortcodes
   const shortcodes = [];
   const shortcodesDirectory = path.join(
-    `${rootPath}/${inputFolderName}/_11ty/shortcodes/*.js`
+    `${inputFolderPath}/_11ty/shortcodes/*.js`
   );
   const shortcodeFiles = await glob(shortcodesDirectory);
   const importedShortcodeFiles = await Promise.all(
@@ -66,7 +68,7 @@ export default async function (eleventyConfig) {
 
   const blockcodes = [];
   const blockcodesDirectory = path.join(
-    `${rootPath}/${inputFolderName}/_11ty/blockcodes/*.js`
+    `${inputFolderPath}/_11ty/blockcodes/*.js`
   );
   const blockcodeFiles = await glob(blockcodesDirectory);
   const importedBlockcodeFiles = await Promise.all(
@@ -79,9 +81,6 @@ export default async function (eleventyConfig) {
       blockcodes.push(name);
     }
   });
-  // console.log("blockcodes: ", blockcodes);
-  //eleventyConfig.addPairedShortcode("card");
-
   // Custom Filters
 
   function sortByOrder(collections) {
