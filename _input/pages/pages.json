@@ -1,5 +1,0 @@
-{
-  "permalink": "/{{ '' if page.fileSlug === 'pages' else page.fileSlug + '/' }}",
-  "tags": ["navigation"],
-  "layout": "default"
-}
