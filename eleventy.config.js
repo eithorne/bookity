@@ -40,7 +40,7 @@ export default async function (eleventyConfig) {
     "node_modules/@fortawesome/fontawesome-free/webfonts": "/assets/fonts",
   });
   eleventyConfig.addPassthroughCopy({
-    "node_modules/js-cookie/src/js.cookie.js": "assets/js/",
+    "node_modules/js-cookie/src/js.cookie.js": "assets/js/js.cookie.js",
   });
 
   // Plugins
@@ -98,8 +98,8 @@ export default async function (eleventyConfig) {
       return Math.sign(orderA - orderB);
     });
   }
-
   eleventyConfig.addFilter("sortByOrder", sortByOrder);
+  // {{book | forEach(dropdownLinks, '{url: item.page.url, label: "Chapter" + loop.index}')}}
 
   // Create Library
   createLibrary(eleventyConfig, config.dir.library);
