@@ -4,25 +4,31 @@
 {% import "_macros/chooseFont.njk" as fonts %}
 {% set book = collections[page.folder] %}
 {% block head %}
-{# Extra content to append to the <head> #}
+  {# Extra content to append to the <head> #}
 {% endblock %}
 {% block content %}
   <header class="bg-body-tertiary py-3 sticky-top d-flex" id="header">
     <div class="flex-grow-1"></div>
     <div class="d-flex container align-items-center justify-content-around hideableContent collapsed fade">
-      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}} {{":: Chapter " + page.index}} </h1>
+      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}}
+        {{":: Chapter " + page.index}}
+      </h1>
       {% if book.length > 1 %}
         {% set dropdownLinks = [] %}
         {% for chapter in book %}
-        {% set addToArray %}
+          {% set addToArray %}
           {{dropdownLinks.push({url: chapter.page.url, label: "Chapter" + loop.index})}}
-        {% endset %}
+          {% endset %}
         {% endfor %}
-        
-        {% dropdown {label: "Select chapter", color: "primary"}, dropdownLinks %}
-        
+
+        {% dropdown {
+          label : "Select chapter",
+          color: "primary"
+        },
+        dropdownLinks %}
+
       {% endif %}
-      
+
       {{fonts.chooseFont({
         buttonColor: "secondary",
         buttonClasses: "ms-3",
@@ -37,16 +43,16 @@
     {{scroll.createAnchor("hideSticky", "50px")}}
     {% include "_partials/chapter.njk" %}
   </main>
-   
+
   <nav class="container">{{nav.pagination(book, page)}}</nav>
 
-{% include "_partials/footer.njk" %}
+  {% include "_partials/footer.njk" %}
 {% endblock %}
 
 {% block body %}
-{# Extra content append to the <body> #}
-{{scroll.createObserver("hideSticky", "#header", "isSticky")}}
-    <script src="/assets/js/js.cookie.js"></script>
-    <script src="/assets/js/textSize.js"></script>
-    <script src="/assets/js/chooseFont.js"></script>
+  {# Extra content append to the <body> #}
+  {{scroll.createObserver("hideSticky", "#header", "isSticky")}}
+  <script src="/assets/js/js.cookie.js"></script>
+  <script src="/assets/js/textSize.js"></script>
+  <script src="/assets/js/chooseFont.js"></script>
 {% endblock %}

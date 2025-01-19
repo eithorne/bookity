@@ -4,9 +4,9 @@ import glob from "fast-glob";
 import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const configFile = path.basename(__filename);
-import { createLibrary } from "./_input/_11ty/collections/createLibrary.js";
+import { createLibrary } from "./_11ty/collections/createLibrary.js";
 
-const rootPath = import.meta.dirname;
+const rootPath =  process.cwd();
 const inputFolderName = "_input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
@@ -14,6 +14,7 @@ const libraryFolderPath = "/library";
 export const config = {
   dir: {
     input: inputFolderName,
+    data: "../_data",
     layouts: "/_includes/layouts",
     library: inputFolderName + libraryFolderPath,
     output: outputFolderName,
@@ -48,13 +49,11 @@ export default async function (eleventyConfig) {
 
   // Custom Shortcodes
   const shortcodes = [];
-  const shortcodesDirectory = path.join(
-    `${rootPath}/${inputFolderName}/_11ty/shortcodes/*.js`
-  );
-  const shortcodeFiles = await glob(shortcodesDirectory);
-  const importedShortcodeFiles = await Promise.all(
-    shortcodeFiles.map((file) => import(file))
-  );
+  const shortCodesGlob = path.join(
+    `${rootPath}/_11ty/shortcodes/*.js`
+  ).replaceAll("\\", "/");
+  
+  const importedShortcodeFiles = await importFiles(shortCodesGlob)
   // console.log("Imported shortcode files: ", importedShortcodeFiles);
   importedShortcodeFiles.forEach((file) => {
     for (const [name, shortcode] of Object.entries(file)) {
@@ -65,13 +64,10 @@ export default async function (eleventyConfig) {
   // console.log("shortcodes: ", shortcodes);
 
   const blockcodes = [];
-  const blockcodesDirectory = path.join(
-    `${rootPath}/${inputFolderName}/_11ty/blockcodes/*.js`
-  );
-  const blockcodeFiles = await glob(blockcodesDirectory);
-  const importedBlockcodeFiles = await Promise.all(
-    blockcodeFiles.map((file) => import(file))
-  );
+  const blocksGlob = path.join(
+    `${rootPath}/_11ty/blockcodes/*.js`
+  ).replaceAll("\\", "/");
+  const importedBlockcodeFiles = await importFiles(blocksGlob)
   // console.log("imported blockcode files: ", importedBlockcodeFiles);
   importedBlockcodeFiles.forEach((file) => {
     for (const [name, blockcode] of Object.entries(file)) {
@@ -79,28 +75,35 @@ export default async function (eleventyConfig) {
       blockcodes.push(name);
     }
   });
-  // console.log("blockcodes: ", blockcodes);
-  //eleventyConfig.addPairedShortcode("card");
 
   // Custom Filters
-
-  function sortByOrder(collections) {
+  function sortByOrder(collections, orderKey = "order") {
     let collectionsClone = [...collections];
-    return collectionsClone.sort((a, b) => {
+    collectionsClone.forEach(collection => collection.order = collection.data[orderKey] ?? collection.data.page[orderKey])
+    collectionsClone.sort((a, b) => {
       // if order is not set, we'll send it to the end, maintaining the default order
-      const maxValue = collections.length * 2;
-      const orderA = a.data.order
-        ? a.data.order
-        : maxValue - collectionsClone.indexOf(a);
-      const orderB = b.data.order
-        ? b.data.order
-        : maxValue - collectionsClone.indexOf(b);
+      const maxValue = Infinity;
+      const orderA = a.order
+        ?? maxValue - collectionsClone.indexOf(a);
+      const orderB = b.order
+        ?? maxValue - collectionsClone.indexOf(b);
       return Math.sign(orderA - orderB);
     });
+    // collectionsClone.forEach(collection => console.log(collection.permalink))
+    return collectionsClone
   }
 
   eleventyConfig.addFilter("sortByOrder", sortByOrder);
 
   // Create Library
   createLibrary(eleventyConfig, config.dir.library);
+}
+
+async function importFiles(pathGlob) {
+  try{
+  const absoluteFilePaths = await glob.async(pathGlob);
+  const relativeFilePaths = absoluteFilePaths.map(file => "./" + path.relative(".", file).replaceAll("\\", "/"))
+  return await Promise.all(
+    relativeFilePaths.map((file) => import(file))
+  );} catch(err) {console.log(err)}
 }

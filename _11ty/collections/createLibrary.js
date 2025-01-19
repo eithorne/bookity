@@ -27,11 +27,6 @@ export async function createLibrary(eleventyConfig, path) {
             folder.forEach((file, i) => {
               file.settings = file.data;
               file.fileInfo = file.page;
-              if ("tags" in file.settings) {
-                file.settings.tags.push(folder);
-              } else {
-                file.settings.tags = [folder];
-              }
               file.fileInfo.folder = folderName;
               file.fileInfo.index0 = i;
               file.fileInfo.index = i + 1;

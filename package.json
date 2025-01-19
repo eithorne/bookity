@@ -4,8 +4,8 @@
   "description": "\"An 11ty template for self-hosting webnovels and/or fanfiction\"",
   "main": "index.js",
   "scripts": {
-    "watch:sass": "sass --no-source-map --watch _input/_sass:_output/assets/css --style compressed",
-    "build:sass": "sass --no-source-map _input/_sass:_output/assets/css --style compressed",
+    "watch:sass": "sass --no-source-map --watch _input/_sass:_output/assets/css --style compressed --quiet-deps",
+    "build:sass": "sass --no-source-map _input/_sass:_output/assets/css --style compressed --quiet-deps",
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
     "debug": "DEBUG=Eleventy* npx @11ty/eleventy",
