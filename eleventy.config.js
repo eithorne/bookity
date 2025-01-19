@@ -11,7 +11,8 @@ const inputFolderName = "_input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
 
-const inputFolderPath = rootPath + "/" + inputFolderName.replace("//", "/");
+const inputFolderPath =
+  rootPath + "/" + inputFolderName.replace("//", "/").replace("\\", "/");
 
 export const config = {
   dir: {
