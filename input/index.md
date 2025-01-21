@@ -1,5 +1,5 @@
 ---
-title: home
+title: Bookity Template
 tags:
   - navigation
 order: 1
