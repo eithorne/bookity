@@ -1,0 +1,34 @@
+
+{% import "_macros/pagination.njk" as nav %}
+<div class="bg-body-tertiary py-3">
+  <div class="d-flex container" style="z-index:1021;">
+    <div class="d-flex flex-column justify-content-center">
+      <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}}</h1>
+      {% if (book.length > 1) %}
+      <div class="dropdown">
+        <button class="btn border-0 btn-outline-secondary fs-5 ms-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="--bs-btn-color:var(--bs-secondary-color)">
+          <span class="pe-3">
+          {% for chapter in book %}
+          {{"Chapter " + loop.index if chapter.page.url === page.url}}
+          {% endfor %}
+          </span>
+        </button>
+        <ul class="dropdown-menu py-0 bg-body-secondary">
+          {% for chapter in book %}
+          <li><a class="dropdown-item {{"disabled bg-body-tertiary" if chapter.page.url === page.url}}" href="{{chapter.page.url}}">Chapter {{loop.index}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <nav class="ms-auto me-0 d-flex flex-column gap-2">
+      
+      <a class="btn btn-outline-primary d-inline p-2 w-100" href="/library">
+      {% fa {icon:"angles-left"}, "fa-fw" %} Return to library
+      </a>
+      {% if book.length > 1 %}
+      {{nav.pagination(book, page)}}
+      {% endif %}
+    </nav>
+  </div>
+</div>

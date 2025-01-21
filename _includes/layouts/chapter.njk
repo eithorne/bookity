@@ -1,13 +1,13 @@
 {% extends "./base.njk" %}
 {% import "_macros/pagination.njk" as nav %}
 {% import "_macros/scrollAnchor.njk" as scroll %}
-{% import "_macros/chooseFont.njk" as fonts %}
 {% set book = collections[page.folder] %}
+{% set myData = {"book": book} %}
 {% block head %}
 {# Extra content to append to the <head> #}
 {% endblock %}
 {% block content %}
-  <header class="bg-body-tertiary py-3 sticky-top d-flex" id="header">
+  {# <header class="bg-body-tertiary py-3 sticky-top d-flex" id="header">
     <div class="flex-grow-1"></div>
     <div class="d-flex container align-items-center justify-content-around hideableContent collapsed fade">
       <h1 class="fw-thin ms-0 me-auto">{{page.folder | title}} {{":: Chapter " + page.index}} </h1>
@@ -32,20 +32,26 @@
     </div>
     <div class="flex-grow-1"></div>
     <a id="header-collapse" data-bs-toggle="collapse" data-bs-target="header .hideableContent" class="opacity-50 fs-4 me-3 my-auto justify-self-end stacked-grid text-decoration-none">{% fa {icon: "angle-up"}, "hideableContent collapsed fade" %}{% fa {icon: "angle-down"}, "hideableContent collapse show fade" %}</a>
+  </header> #}
+  <header>
+  {% renderFile "./_includes/_partials/chapter-header.njk", myData %}
   </header>
-  <main class="container my-4 adjustableTextSize adjustableFont">
+  {% renderFile "./_includes/_partials/chapter-toolbar.njk", page.data %}
+  <main class="container mt-3 adjustableTextSize adjustableFont">
     {{scroll.createAnchor("hideSticky", "50px")}}
     {% include "_partials/chapter.njk" %}
   </main>
    
-  <nav class="container">{{nav.pagination(book, page)}}</nav>
+      {% if book.length > 1 %}
+  <nav class="container my-3">{{nav.pagination(book, page)}}</nav>
+      {% endif %}
 
 {% include "_partials/footer.njk" %}
 {% endblock %}
 
 {% block body %}
 {# Extra content append to the <body> #}
-{{scroll.createObserver("hideSticky", "#header", "isSticky")}}
+    {{scroll.createObserver("hideSticky", ".sticky-top", "isSticky")}}
     <script src="/assets/js/js.cookie.js"></script>
     <script src="/assets/js/textSize.js"></script>
     <script src="/assets/js/chooseFont.js"></script>

@@ -1,17 +1,8 @@
 {% macro pagination(collection, page) %}
   {% set previous = {"url": collection[page.index0 - 1].url, "slug": collection[page.index0 - 1].fileSlug} %}
   {% set next = {"url": collection[page.index].url, "slug": collection[page.index].fileSlug} %}
-  <div class="d-flex justify-content-between my-4">
-    <span style="width:10ch">
-      {% if previous.url %}
-        <a href="{{previous.url}}">{% fa {icon: "angles-left", size: "sm"} %} Previous</a>
-      {% endif %}
-    </span>
-      <a href="/library" class="mx-auto">Return to Library</a>
-    <span style="width:10ch">
-      {% if next.url %}
-        <a href="{{next.url}}">Next {% fa {icon: "angles-right", size: "sm"} %}</a>
-      {% endif %}
-    </span>
+  <div class="d-flex gap-2">
+    <a href="{{previous.url}}" class="btn btn-outline-primary {{"disabled" if not previous.url}}">{% fa {icon: "arrow-left", size: "sm"} %} Previous Chapter</a>
+    <a href="{{next.url}}" class="btn btn-outline-primary ms-auto {{"disabled" if not next.url}}">Next Chapter {% fa {icon: "arrow-right", size: "sm"} %}</a>
   </div>
 {% endmacro %}

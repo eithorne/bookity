@@ -1,0 +1,31 @@
+
+{% import "_macros/chooseFont.njk" as fonts %}
+<div class="toolbar d-flex bg-body-secondary py-3 sticky-top">
+  <div class="container d-flex">
+    <div class="hideableContent w-100 collapsed fade">
+      <div class="d-flex flex-column flex-md-row gap-1">
+        <div class="theme-controls d-flex">
+          {% include "_partials/chooseTheme.njk" %}
+        </div>
+        <div class="text-controls d-flex ms-md-auto me-md-0">
+          {% include "_partials/chooseFont.njk" %}
+          <div class="ms-md-2 d-flex my-auto" data-bkt-text-size-modifier="0">
+          {% include "_partials/textSize.njk" %}
+            <hr class="border-top-0 border-start opacity-100 mx-2 my-2">
+            <a data-bkt-format="resetAll" class="btn btn-secondary py-0 px-2 d-flex align-items-center disabled"><i class="fa-arrows-rotate fa-flip-horizontal fa-fw fa-solid fa-xs" style=""></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a
+    id="header-collapse"
+    href="#"
+    data-bs-toggle="collapse"
+    data-bs-target=".toolbar .hideableContent"
+    class="opacity-50 fs-4 me-3 my-2 stacked-grid text-decoration-none position-absolute end-0"
+    >
+    {% fa {icon: "angle-up"}, "hideableContent collapsed fade" %}
+    {% fa {icon: "angle-down"}, "hideableContent collapse show fade" %}
+    </a>
+</div>
