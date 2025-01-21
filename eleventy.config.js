@@ -40,8 +40,9 @@ export default async function (eleventyConfig) {
   // Node modules
   eleventyConfig.addPassthroughCopy({
     "node_modules/@fortawesome/fontawesome-free/webfonts": "/assets/fonts",
-  });
-  eleventyConfig.addPassthroughCopy({
+    "node_modules/phosphor-icons/src/fonts": "/assets/fonts",
+    "node_modules/phosphor-icons/src/css/icons.css":
+      "/assets/css/phosphor-icons.css",
     "node_modules/js-cookie/src/js.cookie.js": "assets/js/js.cookie.js",
   });
 
