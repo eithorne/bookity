@@ -1,66 +1,98 @@
-const increase = document.querySelector("[data-bkt-text='increaseSize']");
-const decrease = document.querySelector("[data-bkt-text='decreaseSize']");
-const reset = document.querySelector("[data-bkt-text='reset']");
+const increaseFontSizeButton = document.querySelector(
+  "[data-bkt-text='increaseSize']"
+);
+const decreaseFontSizeButton = document.querySelector(
+  "[data-bkt-text='decreaseSize']"
+);
+const resetButton = document.querySelector("[data-bkt-text='reset']");
 
-const resizeable = document.querySelector(".adjustableTextSize");
-let currentModifier = Cookies.get("fontSize") ?? 0;
-const min = 14;
-const max = 28;
+const resizeableTextElement = document.querySelector(".adjustableTextSize");
+let currentFontSizeModifier = Cookies.get("fontSize") ?? 0;
 
-document.body.style.setProperty("--text-size-modifier", currentModifier + "px");
-if (currentModifier !== 0) reset.classList.remove("disabled");
+const minimumFontSize = 14;
+const maximumFontSize = 25;
 
-decrease.addEventListener("click", () => {
-  const size = parseInt(
-    window.getComputedStyle(resizeable).getPropertyValue("font-size"),
+document.body.style.setProperty(
+  "--text-size-modifier",
+  currentFontSizeModifier + "px"
+);
+if (currentFontSizeModifier !== "0") resetButton.classList.remove("disabled");
+
+let currentFontSize = window
+  .getComputedStyle(resizeableTextElement)
+  .getPropertyValue("font-size");
+currentFontSizeDisplay = document.querySelector("[data-bkt-text-current-size]");
+
+currentFontSizeDisplay.innerHTML = currentFontSize;
+
+decreaseFontSizeButton.addEventListener("click", () => {
+  currentFontSize = parseInt(
+    window
+      .getComputedStyle(resizeableTextElement)
+      .getPropertyValue("font-size"),
     10
   );
-  reset.classList.remove("disabled");
+  resetButton.classList.remove("disabled");
   document.body.style.setProperty(
     "--text-size-modifier",
-    --currentModifier + "px"
+    --currentFontSizeModifier + "px"
   );
-  if (size === min) {
-    decrease.classList.add("disabled");
+  if (currentFontSize === minimumFontSize + 1) {
+    decreaseFontSizeButton.classList.add("disabled");
   }
-  if (size === max) {
-    increase.classList.remove("disabled");
+  if (currentFontSize === maximumFontSize) {
+    increaseFontSizeButton.classList.remove("disabled");
   }
 
-  if (currentModifier === 0) {
-    reset.classList.add("disabled");
+  if (currentFontSizeModifier === 0) {
+    resetButton.classList.add("disabled");
   }
-  Cookies.set("fontSize", currentModifier);
+  Cookies.set("fontSize", currentFontSizeModifier);
+  currentFontSize = window
+    .getComputedStyle(resizeableTextElement)
+    .getPropertyValue("font-size");
+  currentFontSizeDisplay.innerHTML = currentFontSize;
 });
 
-increase.addEventListener("click", () => {
-  const size = parseInt(
-    window.getComputedStyle(resizeable).getPropertyValue("font-size"),
+increaseFontSizeButton.addEventListener("click", () => {
+  currentFontSize = parseInt(
+    window
+      .getComputedStyle(resizeableTextElement)
+      .getPropertyValue("font-size"),
     10
   );
 
-  reset.classList.remove("disabled");
+  resetButton.classList.remove("disabled");
   document.body.style.setProperty(
     "--text-size-modifier",
-    ++currentModifier + "px"
+    ++currentFontSizeModifier + "px"
   );
-  if (size === max) {
-    increase.classList.add("disabled");
+  if (currentFontSize === maximumFontSize - 1) {
+    increaseFontSizeButton.classList.add("disabled");
   }
-  if (size === min) {
-    decrease.classList.remove("disabled");
+  if (currentFontSize === minimumFontSize) {
+    decreaseFontSizeButton.classList.remove("disabled");
   }
-  if (currentModifier === 0) {
-    reset.classList.add("disabled");
+  if (currentFontSizeModifier === 0) {
+    resetButton.classList.add("disabled");
   }
-  Cookies.set("fontSize", currentModifier);
+  Cookies.set("fontSize", currentFontSizeModifier);
+  currentFontSize = window
+    .getComputedStyle(resizeableTextElement)
+    .getPropertyValue("font-size");
+  currentFontSizeDisplay.innerHTML = currentFontSize;
 });
 
-reset.addEventListener("click", () => {
+resetButton.addEventListener("click", () => {
   document.body.style.setProperty("--text-size-modifier", 0);
-  currentModifier = 0;
-  reset.classList.add("disabled");
-  increase.classList.remove("disabled");
-  decrease.classList.remove("disabled");
-  Cookies.set("fontSize", currentModifier);
+  currentFontSizeModifier = 0;
+  resetButton.classList.add("disabled");
+  increaseFontSizeButton.classList.remove("disabled");
+  decreaseFontSizeButton.classList.remove("disabled");
+  Cookies.set("fontSize", currentFontSizeModifier);
+
+  currentFontSize = window
+    .getComputedStyle(resizeableTextElement)
+    .getPropertyValue("font-size");
+  currentFontSizeDisplay.innerHTML = currentFontSize;
 });
