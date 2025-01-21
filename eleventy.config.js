@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const configFile = path.basename(__filename);
 import { createLibrary } from "./_11ty/collections/createLibrary.js";
 
-const rootPath =  process.cwd();
+const rootPath = process.cwd();
 const inputFolderName = "input";
 const outputFolderName = "_output";
 const libraryFolderPath = "/library";
@@ -29,9 +29,9 @@ export const config = {
 
 export default async function (eleventyConfig) {
   // Configure Eleventy Here
-
+  eleventyConfig.setServerOptions({ watch: ["_output/assets/**/*.css"] });
   // Copy these folders and their contents to the corresponding directory in _output
-  eleventyConfig.addPassthroughCopy("_input/assets");
+  eleventyConfig.addPassthroughCopy("input/assets");
 
   // Copy files with these extensions from _input to the corresponding directory in _output
   eleventyConfig.addPassthroughCopy("**/*.jpg");
@@ -50,11 +50,11 @@ export default async function (eleventyConfig) {
 
   // Custom Shortcodes
   const shortcodes = [];
-  const shortCodesGlob = path.join(
-    `${rootPath}/_11ty/shortcodes/*.js`
-  ).replaceAll("\\", "/");
-  
-  const importedShortcodeFiles = await importFiles(shortCodesGlob)
+  const shortCodesGlob = path
+    .join(`${rootPath}/_11ty/shortcodes/*.js`)
+    .replaceAll("\\", "/");
+
+  const importedShortcodeFiles = await importFiles(shortCodesGlob);
   // console.log("Imported shortcode files: ", importedShortcodeFiles);
   importedShortcodeFiles.forEach((file) => {
     for (const [name, shortcode] of Object.entries(file)) {
@@ -65,10 +65,10 @@ export default async function (eleventyConfig) {
   // console.log("shortcodes: ", shortcodes);
 
   const blockcodes = [];
-  const blocksGlob = path.join(
-    `${rootPath}/_11ty/blockcodes/*.js`
-  ).replaceAll("\\", "/");
-  const importedBlockcodeFiles = await importFiles(blocksGlob)
+  const blocksGlob = path
+    .join(`${rootPath}/_11ty/blockcodes/*.js`)
+    .replaceAll("\\", "/");
+  const importedBlockcodeFiles = await importFiles(blocksGlob);
   // console.log("imported blockcode files: ", importedBlockcodeFiles);
   importedBlockcodeFiles.forEach((file) => {
     for (const [name, blockcode] of Object.entries(file)) {
@@ -80,18 +80,20 @@ export default async function (eleventyConfig) {
   // Custom Filters
   function sortByOrder(collections, orderKey = "order") {
     let collectionsClone = [...collections];
-    collectionsClone.forEach(collection => collection.order = collection.data[orderKey] ?? collection.data.page[orderKey])
+    collectionsClone.forEach(
+      (collection) =>
+        (collection.order =
+          collection.data[orderKey] ?? collection.data.page[orderKey])
+    );
     collectionsClone.sort((a, b) => {
       // if order is not set, we'll send it to the end, maintaining the default order
       const maxValue = Infinity;
-      const orderA = a.order
-        ?? maxValue - collectionsClone.indexOf(a);
-      const orderB = b.order
-        ?? maxValue - collectionsClone.indexOf(b);
+      const orderA = a.order ?? maxValue - collectionsClone.indexOf(a);
+      const orderB = b.order ?? maxValue - collectionsClone.indexOf(b);
       return Math.sign(orderA - orderB);
     });
     // collectionsClone.forEach(collection => console.log(collection.permalink))
-    return collectionsClone
+    return collectionsClone;
   }
 
   eleventyConfig.addFilter("sortByOrder", sortByOrder);
@@ -101,10 +103,13 @@ export default async function (eleventyConfig) {
 }
 
 async function importFiles(pathGlob) {
-  try{
-  const absoluteFilePaths = await glob.async(pathGlob);
-  const relativeFilePaths = absoluteFilePaths.map(file => "./" + path.relative(".", file).replaceAll("\\", "/"))
-  return await Promise.all(
-    relativeFilePaths.map((file) => import(file))
-  );} catch(err) {console.log(err)}
+  try {
+    const absoluteFilePaths = await glob.async(pathGlob);
+    const relativeFilePaths = absoluteFilePaths.map(
+      (file) => "./" + path.relative(".", file).replaceAll("\\", "/")
+    );
+    return await Promise.all(relativeFilePaths.map((file) => import(file)));
+  } catch (err) {
+    console.log(err);
+  }
 }
