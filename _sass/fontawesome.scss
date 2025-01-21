@@ -6,21 +6,43 @@
 // Font Awesome core compile (Web Fonts-based)
 // -------------------------
 
-@import '../node_modules/@fortawesome/fontawesome-free/scss/functions';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/variables';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/mixins';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/core';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/sizing';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/fixed-width';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/list';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/bordered-pulled';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/animated';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/rotated-flipped';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/stacked';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/icons';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/screen-reader';
+@import "../node_modules/@fortawesome/fontawesome-free/scss/functions";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/variables";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/mixins";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/core";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/sizing";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fixed-width";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/list";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/bordered-pulled";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/animated";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/rotated-flipped";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/stacked";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/icons";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/screen-reader";
 
+.fat::before,
+.fal::before,
+.fad::before,
+.fa-thin::before,
+.fa-light::before,
+.fa-duo::before {
+  content: var(--fa);
+}
+.fal,
+.fa-light,
+.fat,
+.fa-thin,
+.fad,
+.fa-duo {
+  font-weight: 800; // the closest match to light and thin would be regular, but many icons on the free tier only have the solid variant available so for maximum fallback we'll set solid as the default
+  font-family: "Font Awesome 6 Free";
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
 $fa-font-path: "../fonts";
-@import '../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/regular.scss';
-@import '../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
