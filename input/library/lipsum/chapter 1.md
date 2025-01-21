@@ -10,9 +10,13 @@ endNotes: |
 
 ## {{title}}
 
+<img class="mx-auto my-3" src="https://placehold.co/900x200">
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt pellentesque tortor, eget scelerisque mi vehicula vitae. Duis sed nisl egestas, tempus nunc ut, volutpat metus. Morbi vitae rhoncus ante. Quisque auctor enim dolor, at egestas lectus auctor et. Praesent condimentum massa et ultricies volutpat. Donec imperdiet tortor augue, a varius neque hendrerit vitae. In quis fringilla risus. Ut vitae luctus dolor. Curabitur fringilla eros ut lorem varius egestas. Sed viverra convallis posuere. Fusce sed condimentum ipsum, et pharetra sapien. Proin sit amet maximus lorem. Integer placerat magna tellus, ac suscipit ex pretium a. Sed in malesuada nulla.
 
 Aliquam vel turpis dapibus, pellentesque quam a, finibus massa. Mauris sit amet dui semper, porttitor tortor ut, dignissim tortor. Cras volutpat ligula est, nec efficitur felis finibus eget. Donec quis velit tortor. Maecenas vestibulum faucibus quam, a aliquet arcu gravida vitae. Aliquam eros nisl, fringilla in magna at, viverra laoreet ipsum. Sed sagittis venenatis augue condimentum suscipit. Nullam tempus ligula ut lorem bibendum scelerisque. Suspendisse imperdiet placerat felis vel tincidunt. Pellentesque et nisl malesuada, sollicitudin nulla at, laoreet risus. Cras massa leo, finibus a nibh eu, commodo finibus turpis. Duis fermentum congue nisl ac pretium.
+
+<img class="pull-left me-3" src="https://placehold.co/600x400">
 
 Nunc magna velit, aliquet et enim a, tempus cursus massa. Curabitur sed felis metus. Mauris pretium ante a turpis facilisis, nec consequat dolor vehicula. In luctus ex semper euismod ornare. Integer pulvinar, est in interdum porttitor, elit leo dapibus velit, id tristique urna nulla pharetra augue. Sed tincidunt nulla at magna lobortis cursus. Nunc vitae pulvinar purus, placerat vehicula metus. Vestibulum semper porta accumsan. Ut iaculis pellentesque quam, sit amet tincidunt tortor placerat quis. Sed neque ligula, suscipit nec porttitor eget, ullamcorper vel nisl.
 
