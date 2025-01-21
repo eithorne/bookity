@@ -14,15 +14,10 @@ code {
 }
 body {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr;
-  &:has(> footer) {
-    grid-template-rows: 1fr auto;
-  }
-  &:has(> nav + main):has(> footer),
-  &:has(> header + main):has(> footer) {
-    grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  & > footer {
+    margin-top: auto;
   }
 }
 
@@ -41,7 +36,7 @@ body {
   }
 }
 
-header {
+.toolbar {
   transition: all 0.2s;
   #header-collapse {
     opacity: 0 !important;
