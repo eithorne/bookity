@@ -12,8 +12,8 @@ export const dropdown = (button, links, dropdownClasses) => {
       (link) =>
         `<li><a class="dropdown-item ${link.classes ?? ""}" href="${
           link.url ?? "#"
-        }" ${link.data ?? ""}">${link.label ?? ""}</a></li>`
+        }" ${link.data ?? ""}>${link.label ?? ""}</a></li>`
     )
     .join("\n");
-  return `<div class="dropdown ${dropdownClasses}">\n${buttonElement}\n<ul class="dropdown-menu">${linkElements}</ul></div>`;
+  return `<div class="dropdown ${dropdownClasses}">\n${buttonElement}\n<ul class="dropdown-menu py-0">${linkElements}</ul></div>`;
 };
