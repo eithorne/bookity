@@ -1,0 +1,64 @@
+/* theme thangs which i will sort out in due time. just saving my variables <3 */
+
+@import "./bootstrap-core/color-system";
+
+$primary: #ae7242;
+$secondary: #64818a;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+);
+
+@import "../../node_modules/bootstrap/scss/variables";
+
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+$font-family-base: "Nunito Sans";
+$font-family-code: "Anonymous Pro";
+
+$body-color: #644c44;
+$body-bg: #dedbd5;
+
+$body-secondary-color: rgba($body-color, 0.75);
+$body-secondary-bg: darken($body-bg, 4);
+
+$body-tertiary-color: rgba($body-color, 0.5);
+$body-tertiary-bg: darken($body-bg, 5);
+
+$body-emphasis-color: $black;
+
+$link-color: $primary;
+$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-decoration: none;
+
+$border-color: rgba(mix($primary, $body-color, 50), 0.175);
+$border-color-translucent: rgba($body-color, 0.175);
+
+h1, h2, h3 {
+  color: darken($primary, 5)!important;
+  font-family: "Yeseva One";
+  font-weight: 800;
+}

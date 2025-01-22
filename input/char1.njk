@@ -1,0 +1,181 @@
+---
+tags: navigation
+
+charName: Dakota
+charTitle: hes da freaging joker baybee
+charBlurb: A blurb. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu velit nec turpis suscipit dignissim. Nunc at nisl ut tortor fringilla vulputate. Morbi semper lacinia consequat. Aliquam id erat arcu. Donec sagittis dictum facilisis.
+
+charFocalImage: https://f2.toyhou.se/file/f2-toyhou-se/images/46937495_coSDcM9eHKJRyW2.png
+
+charFields: {
+  species: catboy,
+  height: 5'4 / 163 cm,
+  pronouns: he/him,
+  age: fifteen
+}
+
+charTags: [
+  hi,
+  yippiee,
+  blimpus blompus,
+  skibidi fortnite
+]
+
+charContent: 
+  <p>
+    This is a generic text block, intended for a summarizing a character's part in the story - or their backstory, if you don't want to spoil the main story. 
+    <b>Bold</b> <i>italic</i> <u>underline</u> <s>strikethrough</s> <a href='#'>link</a>. 
+  </p>
+  <p>
+    Aenean laoreet cursus nulla, a suscipit mauris vehicula id. Curabitur in libero at diam ullamcorper ultrices sed vitae purus. 
+    Aliquam lectus est, imperdiet at viverra eu, dictum ut libero. Mauris sapien magna, posuere eget leo rhoncus, molestie pellentesque elit. 
+    Curabitur porta enim quis lectus laoreet scelerisque. Pellentesque faucibus tortor in risus posuere, eget vestibulum est porta. 
+    Pellentesque gravida facilisis auctor. Quisque sollicitudin purus quis varius lacinia. 
+  </p>
+  <p>
+    Quisque tincidunt vulputate nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+    In hac habitasse platea dictumst. Quisque at luctus arcu. Phasellus vitae metus maximus sem auctor malesuada. 
+    Aenean eu lectus id odio tempor ultrices. Nulla a turpis quam. Etiam semper eleifend nunc, ut congue quam rutrum ut. 
+    Morbi imperdiet tempor arcu, quis pretium justo pharetra vel. Quisque sit amet ante sollicitudin, pellentesque eros id, semper tellus. 
+    Curabitur in urna mi. Nulla facilisis urna ac elit sagittis, ac tempus odio maximus. 
+  </p>
+
+charTraits: {
+  charisma: 60%,
+  intelligence: 80%,
+  creativity: 30%,
+  patience: 50%
+}
+
+charTrivia: [
+  "Some silly goofy trivias.",
+  Curabitur vehicula tristique auctor. Sed in urna mi.,
+  Sed aliquam felis et arcu rhoncus dapibus. Vestibulum varius hendrerit aliquet. Cras ut justo vitae erat aliquet fermentum. Cras vulputate ut ipsum ultrices congue.
+]
+
+charThemes:
+  - title: flora
+    content: Starflower
+    icon: fa-seedling
+
+  - title: fauna
+    content: Wolf
+    icon: fa-paw
+  
+  - title: object
+    content: Crown
+    icon: fa-bag-shopping
+  
+  - title: feeling
+    content: Determination
+    icon: fa-heart
+  
+  - title: song
+    content: Rather Die
+    subtitle: Barns Courtney
+    icon: fa-music
+---
+
+<div class="my-4 mx-auto" style="max-width: 800px;">
+  <div class="row align-items-center mb-4">
+    <div class="col-8">
+      <div class="flex-row align-items-end">
+        <h1 class="mb-0">
+          {{ charName }}
+        </h1>
+        <span class="ml-auto pl-3">
+          {{ charTitle }}
+        </span>
+      </div>
+      <hr>
+      <p class="font-italic text-muted">
+        {{ charBlurb }}
+      </p>
+      <div class="row gy-3 gx-3">
+        {% for field, value in charFields %}
+        <div class="col-6">
+          <div class="card overflow-hidden">
+            <div class="row no-gutters">
+              <div class="col-auto py-1 px-3 font-monospace text-muted bg-faded border-right">
+                {{ field | capitalize }}
+              </div>
+              <div class="col py-1 px-3">
+                {{ value }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <hr>
+      <div class="row gy-2 gx-2 font-monospace">
+        {% for tag in charTags %}
+          <div class="col">
+            <div class="badge w-100 py-2 px-3 bg-primary">
+              # {{ tag }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card overflow-hidden border-0">
+        <img src="{{ charFocalImage }}">
+      </div>
+    </div>
+  </div>
+  <div class="mb-4">
+    {{ charContent | safe }}
+  </div>
+  <div class="row mb-4">
+    <div class="col-5">
+      {% for stat, percentage in charTraits %}
+        <div class="card mb-3 overflow-hidden">
+          <div class="flex-row {{ "py-3" if charTraits | length < 4 else "py-2" }} px-3">
+            <span>
+              {{ stat | capitalize }}
+            </span>
+            <span class="ml-auto font-monospace text-muted">
+              ( {{ percentage }} )
+            </span>
+          </div>
+          <div class="progress rounded-0" style="height: 4px;">
+            <div class="progress-bar" style="width: {{ percentage }};"></div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-7">
+      <ul class="pl-3">
+        {% for trivia in charTrivia %}
+          <li class="mb-2 pl-1 text-primary">
+            <span class="text-body">
+              {{ trivia }}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="row gx-2">
+    {% for key in charThemes %}
+      <div class="col">
+        <div class="card position-relative justify-content-center h-100 py-4 p-3 text-center overflow-hidden">
+          <span class="mb-1 font-monospace text-muted" style="font-size: .85rem;">
+            {{ key.title | lower }}
+          </span>
+          <span>
+            {{ key.content }}
+          </span>
+          {% if key.subtitle %}
+            <span class="text-muted" style="font-size: .85rem;">
+              {{ key.subtitle }}
+            </span>
+          {% endif %}
+          <i class="far {{ key.icon }} position-absolute start-50 translate-middle" style="font-size: 6rem; bottom: -4.5rem; opacity: .1;"></i>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
