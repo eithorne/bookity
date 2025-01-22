@@ -13,7 +13,15 @@ This is your homepage file, set with the default layout template of a header, a 
 
 ## Things to note:
 
-{#
+##### You should reach out to other authors and connect your websites!
+
+Ever heard of a webring? If you havent, it's a way you and your friends can all easily link your websites together and promote each other!
+
+Going independent doesn't mean you have to go it solo, before we had social media and advanced search engines people used to use webrings to find interesting new websites to explore.
+
+[Onionring](https://garlic.garden/onionring) is a simple javascript widget that takes care of the finnicky parts of getting a webring set up for you, so all you need to do is get some friends together and make some websites. One person in the group will need to manage the list itself and host the webring files, but they're all included in the Bookity template already so anyone can set up a ring whenever they like!
+
+If you're feeling particularly ambitious, you could even reach out to people who aren't yet your friends, or take applications to join your webring!
 
 ##### Bootstrap 5.3 is included, with Toyhouse Compatibility!
 
@@ -30,15 +38,19 @@ If you want to use a Toyhouse layout off of Toyhouse, you will need to get permi
 Additionally, I can't guarantee that every code will work! I've done my best to fix the breaking changes, but while you have complete freedom with your code on your own website, TH coders are limited in what they have access to and this leads to some hacky solutions that might not behave the same way off of Toyhouse.
 
 One thing to be aware of: Toyhouse has access to Font Awesome 6 Pro, but unless you have a pro license and set that up yourself, you'll be limited to just the free icons, which might break some layouts.
+
+To help make up for the missing icons, another icon font has also been included: [Phosphor Icons](https://phosphoricons.com/). More below!
 {% endcard %}
 
 But in any case, my hope is that this will make it easier for you to create your webpages if you're not very confident creating your own layouts, particularly for any character profiles you might want to include!
 
----#}
+---
 
-##### Fontawesome 6 Free is included
+##### Fontawesome 6 Free & Phosphor Icons are included
 
-You can use these icons like usual with `<i class="fa-solid fa-heart">`, or you can use the provided shortcode `{% raw %}{% fa "heart" %}{% endraw %}`, and both will result in {% fa "solid heart" %}
+###### <span class="text-muted fst-italic">TODO: introduce and explain phosphor icons, also add a phosphor shortcode</span>
+
+You can use these icons like usual with `<i class="fa-solid fa-heart">`, or you can use the provided shortcode `{% raw %}{% fa "heart" %}{% endraw %}`, and both will result in {% fa "heart" %}
 
 For the shortcode, if you provide just the icon name it'll assume you want that icon in the solid style:  
 {% raw %}`{% fa "heart" %}`{% endraw %} => {% fa "heart" %}
