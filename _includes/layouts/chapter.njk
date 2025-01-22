@@ -34,12 +34,12 @@
     <a id="header-collapse" data-bs-toggle="collapse" data-bs-target="header .hideableContent" class="opacity-50 fs-4 me-3 my-auto justify-self-end stacked-grid text-decoration-none">{% fa {icon: "angle-up"}, "hideableContent collapsed fade" %}{% fa {icon: "angle-down"}, "hideableContent collapse show fade" %}</a>
   </header> #}
   <header>
-  {% renderFile "./_includes/_partials/chapter-header.njk", myData %}
+  {% renderFile "./_includes/_partials/chapters/chapter-header.njk", myData %}
   </header>
-  {% renderFile "./_includes/_partials/chapter-toolbar.njk", page.data %}
+  {% renderFile "./_includes/_partials/chapters/chapter-toolbar.njk", page.data %}
   <main class="container mt-3 adjustableTextSize adjustableFont">
     {{scroll.createAnchor("hideSticky", "50px")}}
-    {% include "_partials/chapter.njk" %}
+    {% include "_partials/chapters/chapter.njk" %}
   </main>
    
       {% if book.length > 1 %}

@@ -29,7 +29,7 @@ export const config = {
 
 export default async function (eleventyConfig) {
   // Configure Eleventy Here
-  eleventyConfig.setServerOptions({ watch: ["_output/assets/**/*.css"] });
+  eleventyConfig.setServerOptions({ watch: ["_output/assets/css/*.css"] });
   // Copy these folders and their contents to the corresponding directory in _output
   eleventyConfig.addPassthroughCopy("input/assets");
 
@@ -44,6 +44,8 @@ export default async function (eleventyConfig) {
     "node_modules/phosphor-icons/src/css/icons.css":
       "/assets/icons/phosphor-icons.css",
     "node_modules/js-cookie/src/js.cookie.js": "assets/js/js.cookie.js",
+    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js":
+      "assets/js/bootstrap.bundle.min.js",
   });
 
   // Plugins
