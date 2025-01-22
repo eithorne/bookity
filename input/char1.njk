@@ -56,24 +56,24 @@ charTrivia: [
 charThemes:
   - title: flora
     content: Starflower
-    icon: fa-seedling
+    icon: flower
 
   - title: fauna
     content: Wolf
-    icon: fa-paw
+    icon: paw-print
   
   - title: object
     content: Crown
-    icon: fa-bag-shopping
+    icon: backpack
   
   - title: feeling
     content: Determination
-    icon: fa-heart
+    icon: pulse
   
   - title: song
     content: Rather Die
     subtitle: Barns Courtney
-    icon: fa-music
+    icon: music-notes
 ---
 
 <div class="my-4 mx-auto" style="max-width: 800px;">
@@ -173,7 +173,7 @@ charThemes:
               {{ key.subtitle }}
             </span>
           {% endif %}
-          <i class="far {{ key.icon }} position-absolute start-50 translate-middle" style="font-size: 6rem; bottom: -4.5rem; opacity: .1;"></i>
+          <i class="ph-{{ key.icon }}-thin position-absolute start-50 top-50 translate-middle" style="font-size: 6rem; opacity: .05;"></i>
         </div>
       </div>
     {% endfor %}
