@@ -23,6 +23,8 @@ Going independent doesn't mean you have to go it solo, before we had social medi
 
 If you're feeling particularly ambitious, you could even reach out to people who aren't yet your friends, or take applications to join your webring!
 
+Do be aware that in order to participate in the webring, everyone will need to be able to include the javascript files on their website somewhere.
+
 ---
 
 ##### Bootstrap 5.3 is included, with Toyhouse Compatibility!
