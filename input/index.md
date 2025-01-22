@@ -23,6 +23,8 @@ Going independent doesn't mean you have to go it solo, before we had social medi
 
 If you're feeling particularly ambitious, you could even reach out to people who aren't yet your friends, or take applications to join your webring!
 
+---
+
 ##### Bootstrap 5.3 is included, with Toyhouse Compatibility!
 
 If you're familiar with the website [Toyhouse](https://toyhou.se), you might already be familiar with bootstrap. Toyhouse uses a custom version of Bootstrap 4, and its community has made a lot of free and paid layouts for character profile layouts and cast pages and whatnot using Bootstrap.
