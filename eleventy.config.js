@@ -42,7 +42,7 @@ export default async function (eleventyConfig) {
     "node_modules/@fortawesome/fontawesome-free/webfonts": "/assets/fonts",
     "node_modules/phosphor-icons/src/fonts": "/assets/fonts",
     "node_modules/phosphor-icons/src/css/icons.css":
-      "/assets/css/phosphor-icons.css",
+      "/assets/icons/phosphor-icons.css",
     "node_modules/js-cookie/src/js.cookie.js": "assets/js/js.cookie.js",
   });
 
